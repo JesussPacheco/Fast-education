@@ -1,0 +1,10 @@
+---
+applications:
+  - name: banking-ddd-nest-ebautista
+    memory: 128MB
+    instances: 1
+    buildpacks:
+      - nodejs_buildpack
+    stack: cflinuxfs3
+    command: node src/main
+    timeout: 120
