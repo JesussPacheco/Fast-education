@@ -41,7 +41,12 @@ export class RegisterPersonHandler
       command.updatedAt != null ? DateTime.fromString(command.updatedAt) : null,
       command.updatedBy != null ? UserId.of(command.updatedBy) : null
     );
-    let person: Person = PersonFactory.createFrom(personNameResult.value, dniResult.value, auditTrail);
+    let person: Person = PersonFactory.createFrom(
+      personNameResult.value,
+      dniResult.value,
+      auditTrail,
+    );
+    console.log(person);
     let personTypeORM: PersonTypeORM = PersonMapper.toTypeORM(person);
     personTypeORM = await this.personRepository.save(personTypeORM);
     if (personTypeORM == null) {

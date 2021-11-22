@@ -17,7 +17,8 @@ export class RegisterPersonValidator {
   public async validate(
     registerPersonRequest: RegisterPersonRequest,
   ): Promise<AppNotification> {
-    let notification: AppNotification = new AppNotification();
+    console.log(registerPersonRequest)
+    const notification: AppNotification = new AppNotification();
     const firstName: string = registerPersonRequest.firstName ? registerPersonRequest.firstName.trim() : '';
     if (firstName.length <= 0) {
       notification.addError('firstName is required', null);

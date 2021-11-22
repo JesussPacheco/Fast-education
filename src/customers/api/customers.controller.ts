@@ -56,6 +56,8 @@ export class CustomersController {
   async getCustomersPerson(@Res({ passthrough: true }) response): Promise<object> {
     try {
       const customers = await this.queryBus.execute(new GetCustomersPersonQuery());
+      console.log("jjjj")
+      console.log(customers)
       return ApiController.ok(response, customers);
     } catch (error) {
       return ApiController.serverError(response, error);
@@ -66,6 +68,7 @@ export class CustomersController {
   async getCustomersCompany(@Res({ passthrough: true }) response): Promise<object> {
     try {
       const customers = await this.queryBus.execute(new GetCustomersCompanyQuery());
+
       return ApiController.ok(response, customers);
     } catch (error) {
       return ApiController.serverError(response, error);
