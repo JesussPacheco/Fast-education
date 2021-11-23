@@ -1,38 +1,38 @@
 import { Module } from '@nestjs/common';
 import { CustomersController } from './api/customers.controller';
-import { CompanyApplicationService } from './application/services/company-application.service';
+import { TeacherApplicationService } from './application/services/teacher-application.service';
 import { CqrsModule } from '@nestjs/cqrs';
-import { RegisterPersonValidator } from './application/validators/register-person.validator';
+import { RegisterEstudentValidator } from './application/validators/register-estudent.validator';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RegisterCompanyHandler } from './application/handlers/commands/register-company.handler';
-import { PersonRegisteredHandler } from './application/handlers/events/person-registered.handler';
-import { GetCustomersPersonHandler } from './application/handlers/queries/get-customers-person.handler';
-import { PersonApplicationService } from './application/services/person-application.service';
-import { RegisterCompanyValidator } from './application/validators/register-company.validator';
-import { RegisterPersonHandler } from './application/handlers/commands/register-person.handler';
-import { CompanyTypeORM } from './infrastructure/persistence/typeorm/entities/company.typeorm';
-import { PersonTypeORM } from './infrastructure/persistence/typeorm/entities/person.typeorm';
+import { RegisterTeacherHandler } from './application/handlers/commands/register-teacher.handler';
+import { EstudentRegisteredHandler } from './application/handlers/events/estudent-registered.handler';
+import { GetCustomersEstudentHandler } from './application/handlers/queries/get-customers-estudent.handler';
+import { EstudentApplicationService } from './application/services/estudent-application.service';
+import { RegisterTeacherValidator } from './application/validators/register-teacher.validator';
+import { RegisterEstudentHandler } from './application/handlers/commands/register-estudent.handler';
+import { TeacherTypeORM } from './infrastructure/persistence/typeorm/entities/teacher.typeorm';
+import { EstudentTypeORM } from './infrastructure/persistence/typeorm/entities/estudent.typeorm';
 import { CustomerTypeORM } from './infrastructure/persistence/typeorm/entities/customer.typeorm';
-import { CompanyRegisteredHandler } from './application/handlers/events/company-registered.handler';
-import { GetCustomersCompanyHandler } from './application/handlers/queries/get-customers-company.handler';
+import { TeacherRegisteredHandler } from './application/handlers/events/teacher-registered.handler';
+import { GetCustomersTeacherHandler } from './application/handlers/queries/get-customers-teacher.handler';
 import { MoneyTransferredHandler } from './application/handlers/events/money-transferred.handler';
 
-export const CommandHandlers = [RegisterPersonHandler, RegisterCompanyHandler];
-export const EventHandlers = [PersonRegisteredHandler, CompanyRegisteredHandler, MoneyTransferredHandler];
-export const QueryHandlers = [GetCustomersPersonHandler, GetCustomersCompanyHandler];
+export const CommandHandlers = [RegisterEstudentHandler, RegisterTeacherHandler];
+export const EventHandlers = [EstudentRegisteredHandler, TeacherRegisteredHandler, MoneyTransferredHandler];
+export const QueryHandlers = [GetCustomersEstudentHandler, GetCustomersTeacherHandler];
 
 @Module({
   imports: [
     CqrsModule,
-    TypeOrmModule.forFeature([CustomerTypeORM, PersonTypeORM, CompanyTypeORM]),
+    TypeOrmModule.forFeature([CustomerTypeORM, EstudentTypeORM, TeacherTypeORM]),
   ],
   exports: [TypeOrmModule],
   controllers: [CustomersController],
   providers: [
-    PersonApplicationService,
-    CompanyApplicationService,
-    RegisterPersonValidator,
-    RegisterCompanyValidator,
+    EstudentApplicationService,
+   TeacherApplicationService,
+    RegisterEstudentValidator,
+    RegisterTeacherValidator,
     ...CommandHandlers,
     ...EventHandlers,
     ...QueryHandlers
