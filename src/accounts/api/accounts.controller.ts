@@ -35,8 +35,8 @@ export class AccountsController {
   @Get()
   async getAccounts(@Res({ passthrough: true }) response): Promise<object> {
     try {
-      const customers = await this.queryBus.execute(new GetAccountsQuery());
-      return ApiController.ok(response, customers);
+      const students = await this.queryBus.execute(new GetAccountsQuery());
+      return ApiController.ok(response, students);
     } catch (error) {
       return ApiController.serverError(response, error);
     }
@@ -45,8 +45,8 @@ export class AccountsController {
   @Get('/:id')
   async getById(@Param('id') accountId: number, @Res({ passthrough: true }) response): Promise<object> {
     try {
-      const customers = await this.queryBus.execute(new GetAccountByIdQuery(accountId));
-      return ApiController.ok(response, customers);
+      const students = await this.queryBus.execute(new GetAccountByIdQuery(accountId));
+      return ApiController.ok(response, students);
     } catch (error) {
       return ApiController.serverError(response, error);
     }

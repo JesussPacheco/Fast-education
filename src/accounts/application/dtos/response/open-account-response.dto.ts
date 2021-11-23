@@ -7,6 +7,6 @@ export class OpenAccountResponse {
     public createdBy: number,
     public updatedAt: string,
     public updatedBy: number,
-    public customerId: number
+    public studentId: number
   ) {}
 }

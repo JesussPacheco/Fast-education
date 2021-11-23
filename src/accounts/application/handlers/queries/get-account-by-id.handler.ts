@@ -14,7 +14,7 @@ export class GetAccountByIdHandler implements IQueryHandler<GetAccountByIdQuery>
       a.id,
       a.number,
       a.balance,
-      a.customer_id,
+      a.student_id,
       a.created_at,
       a.created_by,
       a.updated_at,
@@ -32,7 +32,7 @@ export class GetAccountByIdHandler implements IQueryHandler<GetAccountByIdQuery>
     accountDto.id = Number(ormAccount.id);
     accountDto.number = ormAccount.number;
     accountDto.balance = Number(ormAccount.balance);
-    accountDto.customerId = Number(ormAccount.customer_id);
+    accountDto.studentId = Number(ormAccount.student_id);
     accountDto.createdAt = ormAccount.created_at;
     accountDto.createdBy = ormAccount.created_by;
     accountDto.updatedAt = ormAccount.updated_at;

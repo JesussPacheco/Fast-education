@@ -11,10 +11,11 @@ import { AccountNumber } from '../../../domain/value-objects/account-number.valu
 import { AccountFactory } from '../../../domain/factories/account.factory';
 import { Money } from '../../../../common/domain/value-objects/money.value';
 import { Currency } from '../../../../common/domain/enums/currency.enum';
-import { CustomerId } from '../../../../customers/domain/value-objects/customer-id.value';
+
 import { AccountId } from '../../../domain/value-objects/account-id.value';
 import { MoneyWithdrawn } from '../../../../transactions/domain/events/money-withdrawn.event';
 import { CompleteTransaction } from '../../../../transactions/application/commands/complete-transaction.command';
+import { StudentId } from "../../../../students/domain/value-objects/student-id.value";
 
 @EventsHandler(MoneyWithdrawn)
 export class MoneyWithdrawnHandler implements IEventHandler<MoneyWithdrawn> {
@@ -39,7 +40,7 @@ export class MoneyWithdrawnHandler implements IEventHandler<MoneyWithdrawn> {
       return;
     }
     const accountAmount: Money = Money.create(accountTypeORM.balance.balance, accountTypeORM.balance.currency);
-    let account: Account = AccountFactory.withId(AccountId.of(accountTypeORM.id), accountNumberResult.value, accountAmount, CustomerId.of(accountTypeORM.customerId.value), null);
+    let account: Account = AccountFactory.withId(AccountId.of(accountTypeORM.id), accountNumberResult.value, accountAmount, StudentId.of(accountTypeORM.studentId.value), null);
     const withdrawAmount: Money = Money.create(event.amount, Currency.SOLES);
     const depositResult: Result<AppNotification, Account> = account.withdraw(withdrawAmount);
     if (depositResult.isFailure()) {

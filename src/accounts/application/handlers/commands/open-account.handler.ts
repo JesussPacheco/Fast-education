@@ -11,8 +11,9 @@ import { Currency } from '../../../../common/domain/enums/currency.enum';
 import { AccountFactory } from '../../../domain/factories/account.factory';
 import { Account } from '../../../domain/entities/account.entity';
 import { AccountMapper } from '../../mappers/account.mapper';
-import { CustomerId } from '../../../../customers/domain/value-objects/customer-id.value';
+
 import { AccountId } from '../../../domain/value-objects/account-id.value';
+import { StudentId } from "../../../../students/domain/value-objects/student-id.value";
 
 @CommandHandler(OpenAccount)
 export class OpenAccountHandler
@@ -31,8 +32,8 @@ export class OpenAccountHandler
       return accountId;
     }
     const balance: Money = Money.create(0, Currency.SOLES);
-    const customerId: CustomerId = CustomerId.of(command.customerId);
-    let account: Account = AccountFactory.createFrom(accountNumberResult.value, balance, customerId, null);
+    const studentId: StudentId = StudentId.of(command.studentId);
+    let account: Account = AccountFactory.createFrom(accountNumberResult.value, balance, studentId, null);
     let accountTypeORM: AccountTypeORM = AccountMapper.toTypeORM(account);
     accountTypeORM = await this.accountRepository.save(accountTypeORM);
     if (accountTypeORM == null) {

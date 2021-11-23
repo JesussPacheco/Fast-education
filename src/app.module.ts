@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CustomersModule } from './customers/customers.module';
+import { StudentsModule } from './students/students.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountsModule } from './accounts/accounts.module';
 import { TransactionsModule } from './transactions/transactions.module';
@@ -9,7 +9,7 @@ import { RoutesModule } from './routes/routes.module';
 
 @Module({
   imports: [
-    CustomersModule,
+    StudentsModule,
     AccountsModule,
     TransactionsModule,
     RoutesModule,

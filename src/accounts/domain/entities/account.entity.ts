@@ -1,4 +1,4 @@
-import { CustomerId } from '../../../customers/domain/value-objects/customer-id.value';
+import { StudentId } from '../../../students/domain/value-objects/student-id.value';
 import { Money } from '../../../common/domain/value-objects/money.value';
 import { AppNotification } from '../../../common/application/app.notification';
 import { Result } from 'typescript-result';
@@ -12,19 +12,19 @@ export class Account extends AggregateRoot {
   private id: AccountId;
   private readonly number: AccountNumber;
   private balance: Money;
-  private readonly customerId: CustomerId;
+  private readonly studentId: StudentId;
   private readonly auditTrail: AuditTrail;
 
-  public constructor(number: AccountNumber, balance: Money, customerId: CustomerId, auditTrail: AuditTrail) {
+  public constructor(number: AccountNumber, balance: Money, studentId: StudentId, auditTrail: AuditTrail) {
     super();
     this.number = number;
     this.balance = balance;
-    this.customerId = customerId;
+    this.studentId = studentId;
     this.auditTrail = auditTrail;
   }
 
   public open() {
-    const event = new AccountOpened(this.id.getValue(), this.number.getValue(), this.customerId.getValue());
+    const event = new AccountOpened(this.id.getValue(), this.number.getValue(), this.studentId.getValue());
     this.apply(event);
   }
 
@@ -84,8 +84,8 @@ export class Account extends AggregateRoot {
     return this.balance;
   }
 
-  public getCustomerId(): CustomerId {
-    return this.customerId;
+  public getStudentId(): StudentId {
+    return this.studentId;
   }
 
   public getAuditTrail(): AuditTrail {

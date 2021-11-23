@@ -6,8 +6,6 @@ import { AppNotification } from '../../../common/application/app.notification';
 import { RegisterRouteResponseDto } from '../dtos/response/register-route-response.dto';
 import { RegisterRouteCommand } from '../commands/register-route.command';
 import { Injectable } from '@nestjs/common';
-
-
 @Injectable()
 export class RoutesApplicationService {
   constructor(
