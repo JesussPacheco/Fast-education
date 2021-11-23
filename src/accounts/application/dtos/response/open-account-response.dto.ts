@@ -3,6 +3,8 @@ export class OpenAccountResponse {
     public id: number,
     public number: string,
     public balance: number,
+    public expirationDa: string,
+    public secCode: number,
     public createdAt: string,
     public createdBy: number,
     public updatedAt: string,

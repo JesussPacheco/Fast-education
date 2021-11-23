@@ -3,6 +3,9 @@ export class GetAccountsDto {
   public number: string;
   public balance: number;
   public currency: string;
+  public expirationDa: string;
+  public secCode: number;
+  
   public customerId: number;
   public createdAt: string;
   public createdBy: number;
