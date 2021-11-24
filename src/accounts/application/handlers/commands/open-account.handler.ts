@@ -13,7 +13,7 @@ import { Account } from '../../../domain/entities/account.entity';
 import { AccountMapper } from '../../mappers/account.mapper';
 
 import { AccountId } from '../../../domain/value-objects/account-id.value';
-import { StudentId } from "../../../../students/domain/value-objects/student-id.value";
+import { UserId } from "../../../../users/domain/value-objects/user-id.value";
 
 @CommandHandler(OpenAccount)
 export class OpenAccountHandler
@@ -32,8 +32,8 @@ export class OpenAccountHandler
       return accountId;
     }
     const balance: Money = Money.create(0, Currency.SOLES);
-    const studentId: StudentId = StudentId.of(command.studentId);
-    let account: Account = AccountFactory.createFrom(accountNumberResult.value, balance, studentId, null);
+    const userId: UserId = UserId.of(command.userId);
+    let account: Account = AccountFactory.createFrom(accountNumberResult.value, balance, userId, null);
     let accountTypeORM: AccountTypeORM = AccountMapper.toTypeORM(account);
     accountTypeORM = await this.accountRepository.save(accountTypeORM);
     if (accountTypeORM == null) {

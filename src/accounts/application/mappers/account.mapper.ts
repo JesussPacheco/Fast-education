@@ -4,7 +4,8 @@ import { AccountNumberTypeORM } from '../../infrastructure/persistence/typeorm/v
 
 import { BalanceTypeORM } from '../../infrastructure/persistence/typeorm/value-objects/balance.typeorm';
 import { AuditTrailTypeORM } from '../../../common/infrastructure/persistence/typeorm/value-objects/audit-trail.typeorm';
-import { StudentIdTypeORM } from "../../infrastructure/persistence/typeorm/value-objects/student-id.typeorm";
+import { UserIdTypeORM } from "../../infrastructure/persistence/typeorm/value-objects/student-id.typeorm";
+
 
 
 export class AccountMapper {
@@ -13,7 +14,7 @@ export class AccountMapper {
     accountTypeORM.id = account.getId() != null ? account.getId().getValue() : 0;
     accountTypeORM.number = account.getNumber() != null ? AccountNumberTypeORM.from(account.getNumber().getValue()) : null;
     accountTypeORM.balance = account.getBalance() != null ? BalanceTypeORM.from(account.getBalance().getAmount(), account.getBalance().getCurrency()) : null;
-    accountTypeORM.studentId = account.getStudentId() != null ? StudentIdTypeORM.from(account.getStudentId().getValue()) : null;
+    accountTypeORM.userId = account.getUserId() != null ? UserIdTypeORM.from(account.getUserId().getValue()) : null;
     accountTypeORM.auditTrail = account.getAuditTrail() != null ? AuditTrailTypeORM.from(
       account.getAuditTrail().getCreatedAt().format(),
       account.getAuditTrail().getCreatedBy().getValue(),

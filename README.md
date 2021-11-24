@@ -33,7 +33,7 @@ $ npm install --save @nestjs/cqrs
 $ npm install --save typescript-result
 $ npm install --save moment-timezone
 $ npm install --save node-sql-reader
-$ nest g resource students
+$ nest g resource users
 ```
 
 ## Environment variables

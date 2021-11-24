@@ -1,5 +1,0 @@
-export class GetStudentsCompanyDto {
-  public id: number;
-  public companyName: string;
-  public ruc: string;
-}

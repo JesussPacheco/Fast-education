@@ -1,6 +1,6 @@
 export class OpenAccountRequest {
   constructor(
-    public readonly studentId: number,
+    public readonly userId: number,
     public readonly number: string
   ) {
   }

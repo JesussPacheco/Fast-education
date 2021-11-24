@@ -3,7 +3,7 @@ export class GetAccountsDto {
   public number: string;
   public balance: number;
   public currency: string;
-  public studentId: number;
+  public userId: number;
   public createdAt: string;
   public createdBy: number;
   public updatedAt: string;

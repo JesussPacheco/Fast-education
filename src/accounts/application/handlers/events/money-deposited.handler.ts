@@ -12,7 +12,7 @@ import { AccountNumber } from '../../../domain/value-objects/account-number.valu
 import { AccountFactory } from '../../../domain/factories/account.factory';
 import { Money } from '../../../../common/domain/value-objects/money.value';
 import { Currency } from '../../../../common/domain/enums/currency.enum';
-import { StudentId } from '../../../../students/domain/value-objects/student-id.value';
+import { UserId } from '../../../../users/domain/value-objects/user-id.value';
 import { AccountId } from '../../../domain/value-objects/account-id.value';
 import { CompleteTransaction } from '../../../../transactions/application/commands/complete-transaction.command';
 
@@ -39,7 +39,7 @@ export class MoneyDepositedHandler implements IEventHandler<MoneyDeposited> {
       return;
     }
     const accountAmount: Money = Money.create(accountTypeORM.balance.balance, accountTypeORM.balance.currency);
-    let account: Account = AccountFactory.withId(AccountId.of(accountTypeORM.id), accountNumberResult.value, accountAmount, StudentId.of(accountTypeORM.studentId.value), null);
+    let account: Account = AccountFactory.withId(AccountId.of(accountTypeORM.id), accountNumberResult.value, accountAmount, UserId.of(accountTypeORM.userId.value), null);
     const depositAmount: Money = Money.create(event.amount, Currency.SOLES);
     const depositResult: Result<AppNotification, Account> = account.deposit(depositAmount);
     if (depositResult.isFailure()) {

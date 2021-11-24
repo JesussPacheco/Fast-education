@@ -11,7 +11,7 @@ import { AccountNumber } from '../../../domain/value-objects/account-number.valu
 import { AccountFactory } from '../../../domain/factories/account.factory';
 import { Money } from '../../../../common/domain/value-objects/money.value';
 import { Currency } from '../../../../common/domain/enums/currency.enum';
-import { StudentId } from '../../../../students/domain/value-objects/student-id.value';
+import { UserId } from '../../../../users/domain/value-objects/user-id.value';
 import { AccountId } from '../../../domain/value-objects/account-id.value';
 import { MoneyTransferred } from '../../../../transactions/domain/events/money-transferred.event';
 import { CompleteTransaction } from '../../../../transactions/application/commands/complete-transaction.command';
@@ -53,10 +53,10 @@ export class MoneyTransferredHandler implements IEventHandler<MoneyTransferred> 
       return;
     }
     const fromAccountAmount: Money = Money.create(fromAccountTypeORM.balance.balance, fromAccountTypeORM.balance.currency);
-    let fromAccount: Account = AccountFactory.withId(AccountId.of(fromAccountTypeORM.id), fromAccountNumberResult.value, fromAccountAmount, StudentId.of(fromAccountTypeORM.studentId.value), null);
+    let fromAccount: Account = AccountFactory.withId(AccountId.of(fromAccountTypeORM.id), fromAccountNumberResult.value, fromAccountAmount, UserId.of(fromAccountTypeORM.userId.value), null);
 
     const toAccountAmount: Money = Money.create(toAccountTypeORM.balance.balance, toAccountTypeORM.balance.currency);
-    let toAccount: Account = AccountFactory.withId(AccountId.of(toAccountTypeORM.id), toAccountNumberResult.value, toAccountAmount, StudentId.of(toAccountTypeORM.studentId.value), null);
+    let toAccount: Account = AccountFactory.withId(AccountId.of(toAccountTypeORM.id), toAccountNumberResult.value, toAccountAmount, UserId.of(toAccountTypeORM.userId.value), null);
 
     const transferAmount: Money = Money.create(event.amount, Currency.SOLES);
 

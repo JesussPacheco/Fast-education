@@ -19,7 +19,7 @@ export class RegisterRouteValidator {
     const notification: AppNotification = new AppNotification();
     const name: string = registerRouteRequestDto.name?registerRouteRequestDto.name.trim():' ';
     if (name.length <= 0) {
-      notification.addError('Student name is required', null);
+      notification.addError('User name is required', null);
     }
     return notification;
   }
