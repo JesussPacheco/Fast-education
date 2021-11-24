@@ -1,4 +1,4 @@
-export class RegisterPersonRequest {
+export class RegisterStudentRequest {
   constructor(
     public readonly firstName: string,
     public readonly lastName: string,

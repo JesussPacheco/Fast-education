@@ -11,9 +11,7 @@ $ npm run start:dev
 $ npm install
 $ npm run build
 $ npm run typeorm:win migration:generate -- -n InitialSchema
-$ npm run typeorm:win migration:create -- -n Users
 $ npm run start:dev
-```
 
 ## Run app - Linux / Mac
 

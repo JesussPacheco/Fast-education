@@ -1,6 +1,6 @@
 import { Column } from 'typeorm';
 
-export class PersonNameTypeORM {
+export class StudentNameTypeORM {
   @Column('varchar', { name: 'first_name', length: 75, nullable: true })
   public firstName: string;
 
@@ -12,7 +12,7 @@ export class PersonNameTypeORM {
     this.lastName = lastName;
   }
 
-  public static from(firstName: string, lastName: string): PersonNameTypeORM {
-    return new PersonNameTypeORM(firstName, lastName);
+  public static from(firstName: string, lastName: string): StudentNameTypeORM {
+    return new StudentNameTypeORM(firstName, lastName);
   }
 }

@@ -1,16 +1,17 @@
 
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { getManager } from 'typeorm';
-import { GetUsersPersonDto } from '../../dtos/queries/get-users-person.dto';
-import { GetUsersPersonQuery } from "../../queries/get-users-person.query";
+
+import { GetUsersStudentQuery } from "../../queries/get-users-student.query";
+import { GetUsersStudentDto } from "../../dtos/queries/get-users-students.dto";
 
 
 
-@QueryHandler(GetUsersPersonQuery)
-export class GetUsersPersonHandler implements IQueryHandler<GetUsersPersonQuery> {
+@QueryHandler(GetUsersStudentQuery)
+export class GetUsersStudentHandler implements IQueryHandler<GetUsersStudentQuery> {
   constructor() {}
 
-  async execute(query: GetUsersPersonQuery) {
+  async execute(query: GetUsersStudentQuery) {
     const manager = getManager();
     const sql = `
     SELECT 
@@ -28,8 +29,8 @@ export class GetUsersPersonHandler implements IQueryHandler<GetUsersPersonQuery>
     if (ormUsers.length <= 0) {
       return [];
     }
-    const users: GetUsersPersonDto[] = ormUsers.map(function (ormUser) {
-      let userDto = new GetUsersPersonDto();
+    const users: GetUsersStudentDto[] = ormUsers.map(function (ormUser) {
+      let userDto = new GetUsersStudentDto();
       userDto.id = Number(ormUser.id);
       userDto.firstName = ormUser.firstName;
       userDto.lastName = ormUser.lastName;

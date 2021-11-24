@@ -1,4 +1,4 @@
-export class RegisterPersonResponse {
+export class RegisterStudentResponse {
   constructor(
     public id: number,
     public readonly firstName: string,

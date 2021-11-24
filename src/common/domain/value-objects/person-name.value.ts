@@ -1,7 +1,7 @@
 import { Result } from 'typescript-result';
 import { AppNotification } from '../../application/app.notification';
 
-export class PersonName {
+export class StudentName {
   private readonly firstName: string;
   private readonly lastName: string;
   private static MAX_LENGTH: number = 75;
@@ -19,7 +19,7 @@ export class PersonName {
     return this.lastName;
   }
 
-  public static create(firstName: string, lastName: string): Result<AppNotification, PersonName> {
+  public static create(firstName: string, lastName: string): Result<AppNotification, StudentName> {
     let notification: AppNotification = new AppNotification();
     firstName = (firstName ?? "").trim();
     lastName = (lastName ?? "").trim();
@@ -38,6 +38,6 @@ export class PersonName {
     if (notification.hasErrors()) {
       return Result.error(notification);
     }
-    return Result.ok(new PersonName(firstName, lastName));
+    return Result.ok(new StudentName(firstName, lastName));
   }
 }

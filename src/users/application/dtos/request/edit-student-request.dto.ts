@@ -1,4 +1,4 @@
-export class EditPersonRequest {
+export class EditStudentRequest {
   constructor(
     public readonly firstName: string,
     public readonly lastName: string,

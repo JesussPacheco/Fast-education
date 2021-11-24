@@ -1,23 +1,24 @@
 import { UserId } from '../value-objects/user-id.value';
 import { Dni } from '../value-objects/dni.value';
-import { PersonName } from '../../../common/domain/value-objects/person-name.value';
+
 import { AuditTrail } from '../../../common/domain/value-objects/audit-trail.value';
 import { User } from './user.entity';
 import { UserType } from '../enums/user-type.enum';
-import { PersonRegistered } from '../events/person-registered.event';
+import { StudentRegistered } from '../events/student-registered.event';
+import { StudentName } from "../../../common/domain/value-objects/person-name.value";
 
-export class Person extends User {
-  private name: PersonName;
+export class Student extends User {
+  private name: StudentName;
   private dni: Dni;
 
-  public constructor(name: PersonName, dni: Dni, auditTrail: AuditTrail) {
+  public constructor(name: StudentName, dni: Dni, auditTrail: AuditTrail) {
     super(UserType.PERSON, auditTrail);
     this.name = name;
     this.dni = dni;
   }
 
   public register() {
-    const event = new PersonRegistered(this.id.getValue(), this.name.getFirstName(), this.name.getLastName(), this.dni.getValue());
+    const event = new StudentRegistered(this.id.getValue(), this.name.getFirstName(), this.name.getLastName(), this.dni.getValue());
     this.apply(event);
   }
 
@@ -25,7 +26,7 @@ export class Person extends User {
     return this.id;
   }
 
-  public getName(): PersonName {
+  public getName(): StudentName {
     return this.name;
   }
 
@@ -37,7 +38,7 @@ export class Person extends User {
     return this.auditTrail;
   }
 
-  public changeName(name: PersonName): void {
+  public changeName(name: StudentName): void {
     this.name = name;
   }
 

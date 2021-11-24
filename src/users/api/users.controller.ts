@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Res, Get } from '@nestjs/common';
-import { RegisterPersonRequest } from '../application/dtos/request/register-person-request.dto';
-import { RegisterPersonResponse } from '../application/dtos/response/register-person-response.dto';
+import { RegisterStudentRequest } from '../application/dtos/request/register-student-request.dto';
+import { RegisterStudentResponse } from '../application/dtos/response/register-student-response.dto';
 import { CompanyApplicationService } from '../application/services/company-application.service';
 import { Result } from 'typescript-result';
 import { AppNotification } from '../../common/application/app.notification';
 import { ApiController } from '../../common/api/api.controller';
 import { QueryBus } from '@nestjs/cqrs';
-import { GetUsersPersonQuery } from '../application/queries/get-users-person.query';
-import { PersonApplicationService } from '../application/services/person-application.service';
+import { GetUsersStudentQuery } from '../application/queries/get-users-student.query';
+import { StudentApplicationService } from '../application/services/student-application.service';
 import { RegisterCompanyRequest } from '../application/dtos/request/register-company-request.dto';
 import { RegisterCompanyResponse } from '../application/dtos/response/register-company-response.dto';
 import { GetUsersCompanyQuery } from '../application/queries/get-users-company.query';
@@ -15,18 +15,18 @@ import { GetUsersCompanyQuery } from '../application/queries/get-users-company.q
 @Controller('users')
 export class UsersController {
   constructor(
-    private readonly personApplicationService: PersonApplicationService,
+    private readonly studentApplicationService: StudentApplicationService,
     private readonly companyApplicationService: CompanyApplicationService,
     private readonly queryBus: QueryBus
   ) {}
 
-  @Post('/person')
-  async registerPerson(
-    @Body() registerPersonRequest: RegisterPersonRequest,
+  @Post('/student')
+  async registerStudent(
+    @Body() registerStudentRequest: RegisterStudentRequest,
     @Res({ passthrough: true }) response
   ): Promise<object> {
     try {
-      const result: Result<AppNotification, RegisterPersonResponse> = await this.personApplicationService.register(registerPersonRequest);
+      const result: Result<AppNotification, RegisterStudentResponse> = await this.studentApplicationService.register(registerStudentRequest);
       if (result.isSuccess()) {
           return ApiController.created(response, result.value);
       }
@@ -52,12 +52,10 @@ export class UsersController {
     }
   }
 
-  @Get('/person')
-  async getUsersPerson(@Res({ passthrough: true }) response): Promise<object> {
+  @Get('/student')
+  async getUsersStudent(@Res({ passthrough: true }) response): Promise<object> {
     try {
-      const users = await this.queryBus.execute(new GetUsersPersonQuery());
-      console.log("jjjj")
-      console.log(users)
+      const users = await this.queryBus.execute(new GetUsersStudentQuery());
       return ApiController.ok(response, users);
     } catch (error) {
       return ApiController.serverError(response, error);
