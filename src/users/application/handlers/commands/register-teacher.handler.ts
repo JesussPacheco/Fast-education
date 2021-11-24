@@ -12,7 +12,12 @@ import { Teacher } from '../../../domain/entities/teacher.entity';
 import { TeacherTypeORM } from '../../../infrastructure/persistence/typeorm/entities/teacher.typeorm';
 import { AuditTrail } from '../../../../common/domain/value-objects/audit-trail.value';
 import { DateTime } from '../../../../common/domain/value-objects/date-time.value';
-import { TeacherName } from "../../../../common/domain/value-objects/company-name.value";
+import { TeacherName } from "../../../../common/domain/value-objects/teacher-name.value";
+
+
+
+
+
 @CommandHandler(RegisterTeacher)
 export class RegisterTeacherHandler
   implements ICommandHandler<RegisterTeacher> {

@@ -4,7 +4,8 @@ import { User } from './user.entity';
 import { Ruc } from '../value-objects/ruc.value';
 import { UserType } from '../enums/user-type.enum';
 import { TeacherRegistered } from '../events/teacher-registered.event';
-import { TeacherName } from "../../../common/domain/value-objects/company-name.value";
+import { TeacherName } from "../../../common/domain/value-objects/teacher-name.value";
+
 
 
 export class Teacher extends User {
