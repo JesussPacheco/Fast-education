@@ -1,39 +1,39 @@
 import { Module } from '@nestjs/common';
 import { UsersController } from './api/users.controller';
-import { CompanyApplicationService } from './application/services/company-application.service';
+import { TeacherApplicationService } from './application/services/teacher-application.service';
 import { CqrsModule } from '@nestjs/cqrs';
 import { RegisterStudentValidator } from './application/validators/register-student.validator';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RegisterCompanyHandler } from './application/handlers/commands/register-company.handler';
+import { RegisterTeacherHandler } from './application/handlers/commands/register-teacher.handler';
 import { StudentRegisteredHandler } from './application/handlers/events/student-registered.handler';
 import { GetUsersStudentHandler } from './application/handlers/queries/get-users-student.handler';
 import { StudentApplicationService } from './application/services/student-application.service';
-import { RegisterCompanyValidator } from './application/validators/register-company.validator';
+import { RegisterTeacherValidator } from './application/validators/register-teacher.validator';
 import { RegisterStudentHandler } from './application/handlers/commands/register-student.handler';
-import { CompanyTypeORM } from './infrastructure/persistence/typeorm/entities/company.typeorm';
+import { TeacherTypeORM } from './infrastructure/persistence/typeorm/entities/teacher.typeorm';
 import { StudentTypeORM } from './infrastructure/persistence/typeorm/entities/student.typeorm';
 
-import { CompanyRegisteredHandler } from './application/handlers/events/company-registered.handler';
-import { GetUsersCompanyHandler } from './application/handlers/queries/get-users-company.handler';
+import { TeacherRegisteredHandler } from './application/handlers/events/teacher-registered.handler';
+import { GetUsersTeacherHandler } from './application/handlers/queries/get-users-teacher.handler';
 import { MoneyTransferredHandler } from './application/handlers/events/money-transferred.handler';
 import { UserTypeORM } from "./infrastructure/persistence/typeorm/entities/user.typeorm";
 
-export const CommandHandlers = [RegisterStudentHandler, RegisterCompanyHandler];
-export const EventHandlers = [StudentRegisteredHandler, CompanyRegisteredHandler, MoneyTransferredHandler];
-export const QueryHandlers = [GetUsersStudentHandler, GetUsersCompanyHandler];
+export const CommandHandlers = [RegisterStudentHandler, RegisterTeacherHandler];
+export const EventHandlers = [StudentRegisteredHandler, TeacherRegisteredHandler, MoneyTransferredHandler];
+export const QueryHandlers = [GetUsersStudentHandler, GetUsersTeacherHandler];
 
 @Module({
   imports: [
     CqrsModule,
-    TypeOrmModule.forFeature([UserTypeORM, StudentTypeORM, CompanyTypeORM]),
+    TypeOrmModule.forFeature([UserTypeORM, StudentTypeORM, TeacherTypeORM]),
   ],
   exports: [TypeOrmModule],
   controllers: [UsersController],
   providers: [
     StudentApplicationService,
-    CompanyApplicationService,
+    TeacherApplicationService,
     RegisterStudentValidator,
-    RegisterCompanyValidator,
+    RegisterTeacherValidator,
     ...CommandHandlers,
     ...EventHandlers,
     ...QueryHandlers

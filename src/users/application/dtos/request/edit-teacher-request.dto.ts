@@ -1,6 +1,5 @@
-export class RegisterCompanyResponse {
+export class EditTeacherRequest {
   constructor(
-    public id: number,
     public readonly name: string,
     public readonly ruc: string
   ) {}

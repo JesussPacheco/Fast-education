@@ -1,4 +1,4 @@
-export class RegisterCompany {
+export class RegisterTeacher {
   constructor(
     public readonly name: string,
     public readonly ruc: string,

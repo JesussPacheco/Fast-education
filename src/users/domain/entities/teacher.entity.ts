@@ -3,21 +3,22 @@ import { AuditTrail } from '../../../common/domain/value-objects/audit-trail.val
 import { User } from './user.entity';
 import { Ruc } from '../value-objects/ruc.value';
 import { UserType } from '../enums/user-type.enum';
-import { CompanyRegistered } from '../events/company-registered.event';
-import { CompanyName } from '../../../common/domain/value-objects/company-name.value';
+import { TeacherRegistered } from '../events/teacher-registered.event';
+import { TeacherName } from "../../../common/domain/value-objects/company-name.value";
 
-export class Company extends User {
-  private name: CompanyName;
+
+export class Teacher extends User {
+  private name: TeacherName;
   private ruc: Ruc;
 
-  public constructor(name: CompanyName, ruc: Ruc, auditTrail: AuditTrail) {
+  public constructor(name: TeacherName, ruc: Ruc, auditTrail: AuditTrail) {
     super(UserType.COMPANY, auditTrail);
     this.name = name;
     this.ruc = ruc;
   }
 
   public register() {
-    const event = new CompanyRegistered(this.id.getValue(), this.name.getValue(), this.ruc.getValue());
+    const event = new TeacherRegistered(this.id.getValue(), this.name.getValue(), this.ruc.getValue());
     this.apply(event);
   }
 
@@ -25,7 +26,7 @@ export class Company extends User {
     return this.id;
   }
 
-  public getName(): CompanyName {
+  public getName(): TeacherName {
     return this.name;
   }
 
@@ -33,7 +34,7 @@ export class Company extends User {
     return this.ruc;
   }
 
-  public changeName(name: CompanyName): void {
+  public changeName(name: TeacherName): void {
     this.name = name;
   }
 

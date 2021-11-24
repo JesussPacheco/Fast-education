@@ -1,22 +1,22 @@
 import { Controller, Post, Body, Res, Get } from '@nestjs/common';
 import { RegisterStudentRequest } from '../application/dtos/request/register-student-request.dto';
 import { RegisterStudentResponse } from '../application/dtos/response/register-student-response.dto';
-import { CompanyApplicationService } from '../application/services/company-application.service';
+import { TeacherApplicationService } from '../application/services/teacher-application.service';
 import { Result } from 'typescript-result';
 import { AppNotification } from '../../common/application/app.notification';
 import { ApiController } from '../../common/api/api.controller';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetUsersStudentQuery } from '../application/queries/get-users-student.query';
 import { StudentApplicationService } from '../application/services/student-application.service';
-import { RegisterCompanyRequest } from '../application/dtos/request/register-company-request.dto';
-import { RegisterCompanyResponse } from '../application/dtos/response/register-company-response.dto';
-import { GetUsersCompanyQuery } from '../application/queries/get-users-company.query';
+import { RegisterTeacherRequest } from '../application/dtos/request/register-teacher-request.dto';
+import { RegisterTeacherResponse } from '../application/dtos/response/register-teacher-response.dto';
+import { GetUsersTeacherQuery } from '../application/queries/get-users-teacher.query';
 
 @Controller('users')
 export class UsersController {
   constructor(
     private readonly studentApplicationService: StudentApplicationService,
-    private readonly companyApplicationService: CompanyApplicationService,
+    private readonly teacherApplicationService: TeacherApplicationService,
     private readonly queryBus: QueryBus
   ) {}
 
@@ -36,13 +36,13 @@ export class UsersController {
     }
   }
 
-  @Post('/company')
-  async registerCompany(
-    @Body() registerCompanyRequest: RegisterCompanyRequest,
+  @Post('/teacher')
+  async registerTeacher(
+    @Body() registerTeacherRequest: RegisterTeacherRequest,
     @Res({ passthrough: true }) response
   ): Promise<object> {
     try {
-      const result: Result<AppNotification, RegisterCompanyResponse> = await this.companyApplicationService.register(registerCompanyRequest);
+      const result: Result<AppNotification, RegisterTeacherResponse> = await this.teacherApplicationService.register(registerTeacherRequest);
       if (result.isSuccess()) {
         return ApiController.created(response, result.value);
       }
@@ -62,10 +62,10 @@ export class UsersController {
     }
   }
 
-  @Get('/company')
-  async getUsersCompany(@Res({ passthrough: true }) response): Promise<object> {
+  @Get('/teacher')
+  async getUsersTeacher(@Res({ passthrough: true }) response): Promise<object> {
     try {
-      const users = await this.queryBus.execute(new GetUsersCompanyQuery());
+      const users = await this.queryBus.execute(new GetUsersTeacherQuery());
 
       return ApiController.ok(response, users);
     } catch (error) {
