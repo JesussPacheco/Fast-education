@@ -5,6 +5,7 @@ export class TeacherRegistered extends UserRegistered {
     public readonly id: number,
     public readonly name: string,
     public readonly ruc: string,
+    public  readonly speciality:string
   ) {
     super(id);
   }

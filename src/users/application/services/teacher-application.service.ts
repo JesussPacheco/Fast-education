@@ -33,13 +33,15 @@ export class TeacherApplicationService {
       createdAt,
       createdBy,
       updatedAt,
-      updatedBy
+      updatedBy,
+    registerTeacherRequest.speciality
     );
     const userId = await this.commandBus.execute(registerTeacher);
     const registerTeacherResponse: RegisterTeacherResponse = new RegisterTeacherResponse(
       userId,
       registerTeacherRequest.name,
-      registerTeacherRequest.ruc
+        registerTeacherRequest.ruc,
+      registerTeacherRequest.speciality
     );
     return Result.ok(registerTeacherResponse);
   }

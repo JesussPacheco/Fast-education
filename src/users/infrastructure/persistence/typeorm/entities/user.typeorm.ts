@@ -13,4 +13,5 @@ export class UserTypeORM {
 
   @Column({ name: 'type', type: 'enum', enum: UserType, default: UserType.COMPANY })
   readonly type: UserType;
+
 }

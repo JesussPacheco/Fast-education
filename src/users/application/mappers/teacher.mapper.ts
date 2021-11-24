@@ -3,6 +3,7 @@ import { Teacher } from '../../domain/entities/teacher.entity';
 import { TeacherTypeORM } from '../../infrastructure/persistence/typeorm/entities/teacher.typeorm';
 import { TeacherNameTypeORM } from '../../infrastructure/persistence/typeorm/value-objects/teacher-name.typeorm';
 import { AuditTrailTypeORM } from '../../../common/infrastructure/persistence/typeorm/value-objects/audit-trail.typeorm';
+import { SpecialityTypeORM } from "../../infrastructure/persistence/typeorm/value-objects/speciality.typeorm";
 
 export class TeacherMapper {
   public static toTypeORM(teacher: Teacher): TeacherTypeORM {
@@ -15,6 +16,7 @@ export class TeacherMapper {
     const updatedBy: number = teacher.getAuditTrail() != null && teacher.getAuditTrail().getUpdatedBy() != null ? teacher.getAuditTrail().getUpdatedBy().getValue() : null;
     const auditTrailTypeORM: AuditTrailTypeORM = AuditTrailTypeORM.from(createdAt, createdBy, updatedAt, updatedBy);
     teacherTypeORM.auditTrail = auditTrailTypeORM;
+    teacherTypeORM.speciality=SpecialityTypeORM.from(teacher.getSpeciality().getValue());
     return teacherTypeORM;
   }
 }
