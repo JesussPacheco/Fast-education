@@ -1,6 +1,4 @@
 import { ChildEntity, Column, Unique } from 'typeorm';
-
-import { RucTypeORM } from '../value-objects/ruc.typeorm';
 import { TeacherNameTypeORM } from '../value-objects/teacher-name.typeorm';
 
 import { UserType } from '../../../../domain/enums/user-type.enum';

@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RegisterTeacher } from 'src/users/application/commands/register-teacher.command';
 import { Repository } from 'typeorm';
 import { UserId } from '../../../domain/value-objects/user-id.value';
-import { Ruc } from '../../../domain/value-objects/ruc.value';
 import { Result } from 'typescript-result';
 import { AppNotification } from '../../../../common/application/app.notification';
 import { TeacherMapper } from '../../mappers/teacher.mapper';

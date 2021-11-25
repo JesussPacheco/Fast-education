@@ -1,4 +1,4 @@
-import { RucTypeORM } from '../../infrastructure/persistence/typeorm/value-objects/ruc.typeorm';
+
 import { Teacher } from '../../domain/entities/teacher.entity';
 import { TeacherTypeORM } from '../../infrastructure/persistence/typeorm/entities/teacher.typeorm';
 import { TeacherNameTypeORM } from '../../infrastructure/persistence/typeorm/value-objects/teacher-name.typeorm';
