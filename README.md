@@ -11,7 +11,6 @@ $ npm run start:dev
 $ npm install
 $ npm run build
 $ npm run typeorm:win migration:generate -- -n InitialSchema
-$ npm run typeorm:win migration:create -- -n Users
 $ npm run start:dev
 ```
 
@@ -21,7 +20,6 @@ $ npm run start:dev
 $ npm install
 $ npm run build
 $ npm run typeorm migration:generate -- -n InitialSchema
-$ npm run typeorm migration:create -- -n Users
 $ npm run start:dev
 ```
 
@@ -39,8 +37,8 @@ $ nest g resource customers
 ## Environment variables
 
 ```
-BANKING_DDD_NEST_MYSQL=mysql://{user}:{password}@{host}:{port}/{database}
-BANKING_DDD_NEST_MYSQL=mysql://root:root@localhost:3306/banking-ddd-nest
+FAST_EDUCATION_DDD_NEST_MYSQL=mysql://{user}:{password}@{host}:{port}/{database}
+FAST_EDUCATION_DDD_NEST_MYSQL=mysql://root:root@localhost:3306/fast-education
 Note: Password must be URL encoded, %25 is the url encoding of %.
 ```
 
