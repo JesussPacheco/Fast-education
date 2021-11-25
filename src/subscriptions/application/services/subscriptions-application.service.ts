@@ -5,18 +5,16 @@ import { Result } from 'typescript-result';
 import { DepositMoneyValidator } from '../validators/deposit-money.validator';
 import { TransferMoneyValidator } from '../validators/transfer-money.validator';
 import { WithdrawMoneyValidator } from '../validators/withdraw-money.validator';
-import { DepositRequestDto } from '../dtos/request/deposit-request.dto';
-import { DepositMoney } from '../commands/deposit-money.command';
 import { DateTime } from '../../../common/domain/value-objects/date-time.value';
-import { DepositResponseDto } from '../dtos/response/deposit-response.dto';
 import { WithdrawRequestDto } from '../dtos/request/withdraw-request.dto';
 import { WithdrawMoney } from '../commands/withdraw-money.command';
 import { WithdrawResponseDto } from '../dtos/response/withdraw-response.dto';
-import { TransferRequestDto } from '../dtos/request/transfer-request.dto';
-import { TransferMoney } from '../commands/transfer-money.command';
-import { TransferResponseDto } from '../dtos/response/transfer-response.dto';
 import { SubscriptionStatus, SubscriptionStatusLabel } from "../../domain/enums/subscriptions.status.enum";
 import { SubscriptionType } from '../../domain/enums/subscriptions-type.enum';
+import {
+  SubscriptionMembershipEnum,
+  SubscriptionMembershipLabel,
+} from "../../domain/enums/subscriptions-membership.enum";
 
 @Injectable()
 export class SubscriptionsApplicationService {
@@ -38,6 +36,8 @@ export class SubscriptionsApplicationService {
     const withdrawCommand: WithdrawMoney = new WithdrawMoney(
       withdrawRequestDto.accountNumber,
       withdrawRequestDto.amount,
+      withdrawRequestDto.routeId,
+      SubscriptionMembershipEnum.get(withdrawRequestDto.membership),
       SubscriptionStatus.STARTED,
       DateTime.utcNow()
     );
@@ -50,7 +50,7 @@ export class SubscriptionsApplicationService {
       withdrawRequestDto.accountNumber,
       withdrawRequestDto.amount,
       withdrawRequestDto.routeId,
-      withdrawRequestDto.membership,
+      SubscriptionMembershipLabel.get(withdrawRequestDto.membership),
       SubscriptionStatusLabel.get(SubscriptionStatus.STARTED),
       null
     );

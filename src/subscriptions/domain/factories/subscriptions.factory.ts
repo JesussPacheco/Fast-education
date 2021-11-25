@@ -15,11 +15,9 @@ export class SubscriptionFactory {
     status: SubscriptionStatus,
     accountIdFrom: AccountId,
     amount: Money,
-    auditTrail,
     routeId: RouteId,
     membership: SubscriptionsMembership,
-    /TE QUEDASTE TRATANDO DE ESOLVER EL PROBLEMA DE QUE NO REONOCIA EL ROUTES.O
-    AuditTrail,
+    auditTrail: AuditTrail,
   ): Subscription {
     return new Subscription(
       type,

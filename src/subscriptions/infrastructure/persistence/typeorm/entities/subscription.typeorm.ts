@@ -4,8 +4,8 @@ import { AccountIdToTypeORM } from '../value-objects/account-id-to.typeorm';
 import { AmountTypeORM } from '../value-objects/amount.typeorm';
 import { AuditTrailTypeORM } from '../../../../../common/infrastructure/persistence/typeorm/value-objects/audit-trail.typeorm';
 import { SubscriptionStatus } from "../../../../domain/enums/subscriptions.status.enum";
-
-
+import { SubscriptionsMembership } from "../../../../domain/enums/subscriptions-membership.enum";
+import { RouteIdTypeorm } from '../value-objects/route-id.typeorm';
 @Entity('subscriptions')
 export class SubscriptionTypeORM {
   @PrimaryGeneratedColumn('increment', { type: 'bigint', name: 'id', unsigned: true })
@@ -26,6 +26,14 @@ export class SubscriptionTypeORM {
   @Column('tinyint', { name: 'status', width: 2, unsigned: true, nullable: false, })
   public status: SubscriptionStatus;
 
+   @Column((type)=>RouteIdTypeorm,{prefix:false})
+   public routeId:RouteIdTypeorm
+
+  @Column('varchar', { name: 'membership', length: 1, nullable: false })
+  public subscriptionsMembership: SubscriptionsMembership;
+
   @Column((type) => AuditTrailTypeORM, { prefix: false })
   public auditTrail: AuditTrailTypeORM;
+
+
 }

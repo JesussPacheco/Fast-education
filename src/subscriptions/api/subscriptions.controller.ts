@@ -15,22 +15,7 @@ export class SubscriptionsController {
   constructor(
     private readonly subscriptionsApplicationService: SubscriptionsApplicationService,
     private readonly queryBus: QueryBus
-  ) {}
-
-  @Post('/deposit')
-  async deposit(
-    @Body() depositRequestDto: DepositRequestDto,
-    @Res({ passthrough: true }) response
-  ): Promise<object> {
-    try {
-      const result: Result<AppNotification, DepositResponseDto> = await this.subscriptionsApplicationService.deposit(depositRequestDto);
-      if (result.isSuccess()) {
-          return ApiController.created(response, result.value);
-      }
-      return ApiController.error(response, result.error.getErrors());
-    } catch (error) {
-      return ApiController.serverError(response, error);
-    }
+  ) {
   }
 
   @Post('/withdraw')
@@ -40,22 +25,6 @@ export class SubscriptionsController {
   ): Promise<object> {
     try {
       const result: Result<AppNotification, DepositResponseDto> = await this.subscriptionsApplicationService.withdraw(withdrawRequestDto);
-      if (result.isSuccess()) {
-        return ApiController.created(response, result.value);
-      }
-      return ApiController.error(response, result.error.getErrors());
-    } catch (error) {
-      return ApiController.serverError(response, error);
-    }
-  }
-
-  @Post('/transfer')
-  async transfer(
-    @Body() transferRequestDto: TransferRequestDto,
-    @Res({ passthrough: true }) response
-  ): Promise<object> {
-    try {
-      const result: Result<AppNotification, TransferResponseDto> = await this.subscriptionsApplicationService.transfer(transferRequestDto);
       if (result.isSuccess()) {
         return ApiController.created(response, result.value);
       }

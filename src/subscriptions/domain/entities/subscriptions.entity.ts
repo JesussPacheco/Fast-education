@@ -12,6 +12,7 @@ import { SubscriptionId } from '../value-objects/subscriptions-id.value';
 import { SubscriptionType } from '../enums/subscriptions-type.enum';
 import { RouteId } from '../../../routes/domain/value-objects/route-id.value';
 import { SubscriptionsMembership } from '../enums/subscriptions-membership.enum';
+import { Route } from "../../../routes/domain/entities/routes.entity";
 
 export class Subscription extends AggregateRoot {
   private id: SubscriptionId;
@@ -63,17 +64,6 @@ export class Subscription extends AggregateRoot {
     this.apply(event);
   }
 
-  public transfer() {
-    const event = new MoneyTransferred(
-      this.id.getValue(),
-      this.accountFrom.getValue(),
-      this.accountTo.getValue(),
-      this.amount.getAmount(),
-      this.status,
-      null,
-    );
-    this.apply(event);
-  }
 
   public getId(): SubscriptionId {
     return this.id;
@@ -86,13 +76,14 @@ export class Subscription extends AggregateRoot {
   public getStatus(): SubscriptionStatus {
     return this.status;
   }
-
+  public getRouteId(): RouteId {
+    return this.routeId
+  }
+  public getMembership(): SubscriptionsMembership {
+    return this.membership
+ }
   public getAccountFrom(): AccountId {
     return this.accountFrom;
-  }
-
-  public getAccountTo(): AccountId {
-    return this.accountTo;
   }
 
   public getAmount(): Money {
