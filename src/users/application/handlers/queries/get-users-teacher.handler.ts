@@ -4,7 +4,9 @@ import { getManager } from 'typeorm';
 import { GetUsersTeacherDto } from '../../dtos/queries/get-users-teacher.dto';
 
 @QueryHandler(GetUsersTeacherQuery)
-export class GetUsersTeacherHandler implements IQueryHandler<GetUsersTeacherQuery> {
+export class GetUsersTeacherHandler
+  implements IQueryHandler<GetUsersTeacherQuery>
+{
   constructor() {}
 
   async execute(query: GetUsersTeacherQuery) {
@@ -13,7 +15,7 @@ export class GetUsersTeacherHandler implements IQueryHandler<GetUsersTeacherQuer
     SELECT 
       id,
       teacher_name as teacherName,
-      ruc
+      speciality as speciality
     FROM 
       users
     WHERE
@@ -25,10 +27,10 @@ export class GetUsersTeacherHandler implements IQueryHandler<GetUsersTeacherQuer
       return [];
     }
     const users: GetUsersTeacherDto[] = ormUsers.map(function (ormUser) {
-      let userDto = new GetUsersTeacherDto();
+      const userDto = new GetUsersTeacherDto();
       userDto.id = Number(ormUser.id);
       userDto.teacherName = ormUser.teacherName;
-      userDto.ruc = ormUser.ruc;
+      userDto.speciality = ormUser.speciality;
       return userDto;
     });
     return users;

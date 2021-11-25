@@ -7,7 +7,11 @@ import { Speciality } from "../value-objects/speciality.value";
 
 
 export class TeacherFactory {
-  public static createFrom(name: TeacherName, ruc: Ruc, auditTrail: AuditTrail,speciality:Speciality): Teacher {
-    return new Teacher(name, ruc, auditTrail, speciality);
+  public static createFrom(
+    name: TeacherName,
+    auditTrail: AuditTrail,
+    speciality: Speciality,
+  ): Teacher {
+    return new Teacher(name, auditTrail, speciality);
   }
 }

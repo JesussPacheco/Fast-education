@@ -9,7 +9,6 @@ export class TeacherMapper {
   public static toTypeORM(teacher: Teacher): TeacherTypeORM {
     const teacherTypeORM: TeacherTypeORM = new TeacherTypeORM();
     teacherTypeORM.teacherName = TeacherNameTypeORM.from(teacher.getName().getValue());
-    teacherTypeORM.ruc = RucTypeORM.from(teacher.getRuc().getValue());
     const createdAt: string = teacher.getAuditTrail() != null && teacher.getAuditTrail().getCreatedAt() != null ? teacher.getAuditTrail().getCreatedAt().format() : null;
     const createdBy: number = teacher.getAuditTrail() != null && teacher.getAuditTrail().getCreatedBy() != null ? teacher.getAuditTrail().getCreatedBy().getValue() : null;
     const updatedAt: string = teacher.getAuditTrail() != null && teacher.getAuditTrail().getUpdatedAt() != null ? teacher.getAuditTrail().getUpdatedAt().format() : null;

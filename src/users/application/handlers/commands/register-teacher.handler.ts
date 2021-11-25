@@ -32,10 +32,6 @@ export class RegisterTeacherHandler
     if (teacherNameResult.isFailure()) {
       return userId;
     }
-    const rucResult: Result<AppNotification, Ruc> = Ruc.create(command.ruc);
-    if (rucResult.isFailure()) {
-      return userId;
-    }
     const auditTrail: AuditTrail = AuditTrail.from(
       command.createdAt != null ? DateTime.fromString(command.createdAt) : null,
       command.createdBy != null ? UserId.of(command.createdBy) : null,
@@ -45,7 +41,6 @@ export class RegisterTeacherHandler
     const specialityResult: Speciality = Speciality.create(command.speciality);
     let teacher: Teacher = TeacherFactory.createFrom(
       teacherNameResult.value,
-      rucResult.value,
       auditTrail,
       specialityResult
     );

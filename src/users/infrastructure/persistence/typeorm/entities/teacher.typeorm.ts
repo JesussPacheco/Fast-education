@@ -9,12 +9,9 @@ import { SpecialityTypeORM } from '../value-objects/speciality.typeorm';
 
 @ChildEntity(UserType.COMPANY)
 @Unique('UQ_users_teacher_name', ['teacherName.value'])
-@Unique('UQ_users_ruc', ['ruc.value'])
 export class TeacherTypeORM extends UserTypeORM {
   @Column((type) => TeacherNameTypeORM, { prefix: false })
   public teacherName: TeacherNameTypeORM;
-  @Column((type) => RucTypeORM, { prefix: false })
-  public ruc: RucTypeORM;
 
   @Column((type) => SpecialityTypeORM, { prefix: false })
   public speciality: SpecialityTypeORM;

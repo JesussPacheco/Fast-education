@@ -29,7 +29,6 @@ export class TeacherApplicationService {
     const updatedBy = null;
     const registerTeacher: RegisterTeacher = new RegisterTeacher(
       registerTeacherRequest.name,
-      registerTeacherRequest.ruc,
       createdAt,
       createdBy,
       updatedAt,
@@ -40,7 +39,6 @@ export class TeacherApplicationService {
     const registerTeacherResponse: RegisterTeacherResponse = new RegisterTeacherResponse(
       userId,
       registerTeacherRequest.name,
-        registerTeacherRequest.ruc,
       registerTeacherRequest.speciality
     );
     return Result.ok(registerTeacherResponse);

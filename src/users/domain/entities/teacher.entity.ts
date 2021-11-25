@@ -12,18 +12,15 @@ import { Speciality } from "../value-objects/speciality.value";
 
 export class Teacher extends User {
   private name: TeacherName;
-  private ruc: Ruc;
   private speciality: Speciality;
-
-  public constructor(name: TeacherName, ruc: Ruc, auditTrail: AuditTrail,speciality:Speciality) {
+  public constructor(name: TeacherName, auditTrail: AuditTrail,speciality:Speciality) {
     super(UserType.COMPANY, auditTrail);
     this.name = name;
-    this.ruc = ruc;
     this.speciality = speciality;
   }
 
   public register() {
-    const event = new TeacherRegistered(this.id.getValue(), this.name.getValue(), this.ruc.getValue(),this.speciality.getValue());
+    const event = new TeacherRegistered(this.id.getValue(), this.name.getValue(),this.speciality.getValue());
     this.apply(event);
   }
 
@@ -35,9 +32,6 @@ export class Teacher extends User {
     return this.name;
   }
 
-  public getRuc(): Ruc {
-    return this.ruc;
-  }
   public getSpeciality(): Speciality {
     return this.speciality
   }
@@ -46,7 +40,4 @@ export class Teacher extends User {
     this.name = name;
   }
 
-  public changeRuc(ruc: Ruc): void {
-    this.ruc = ruc;
-  }
 }
