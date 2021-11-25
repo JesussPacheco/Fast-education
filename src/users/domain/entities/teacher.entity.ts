@@ -13,7 +13,7 @@ export class Teacher extends User {
   private name: TeacherName;
   private speciality: Speciality;
   public constructor(name: TeacherName, auditTrail: AuditTrail,speciality:Speciality) {
-    super(UserType.COMPANY, auditTrail);
+    super(UserType.TEACHER, auditTrail);
     this.name = name;
     this.speciality = speciality;
   }

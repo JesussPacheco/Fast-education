@@ -11,7 +11,7 @@ export class UserTypeORM {
   @Column((type) => AuditTrailTypeORM, { prefix: false })
   public auditTrail: AuditTrailTypeORM;
 
-  @Column({ name: 'type', type: 'enum', enum: UserType, default: UserType.COMPANY })
+  @Column({ name: 'type', type: 'enum', enum: UserType, default: UserType.STUDENT })
   readonly type: UserType;
 
 }

@@ -5,14 +5,17 @@ import { AuditTrail } from '../../../common/domain/value-objects/audit-trail.val
 import { User } from './user.entity';
 import { UserType } from '../enums/user-type.enum';
 import { StudentRegistered } from '../events/student-registered.event';
-import { StudentName } from "../../../common/domain/value-objects/person-name.value";
+import { StudentName } from "../../../common/domain/value-objects/student-name.value";
+
+
+
 
 export class Student extends User {
   private name: StudentName;
   private dni: Dni;
 
   public constructor(name: StudentName, dni: Dni, auditTrail: AuditTrail) {
-    super(UserType.PERSON, auditTrail);
+    super(UserType.STUDENT, auditTrail);
     this.name = name;
     this.dni = dni;
   }

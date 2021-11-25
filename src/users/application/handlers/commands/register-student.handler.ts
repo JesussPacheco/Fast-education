@@ -13,7 +13,7 @@ import { StudentMapper } from '../../mappers/student.mapper';
 import { StudentTypeORM } from '../../../infrastructure/persistence/typeorm/entities/student.typeorm';
 import { AuditTrail } from '../../../../common/domain/value-objects/audit-trail.value';
 import { DateTime } from '../../../../common/domain/value-objects/date-time.value';
-import { StudentName } from "../../../../common/domain/value-objects/person-name.value";
+import { StudentName } from "../../../../common/domain/value-objects/student-name.value";
 
 @CommandHandler(RegisterStudent)
 export class RegisterStudentHandler
