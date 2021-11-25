@@ -29,7 +29,7 @@ export class SubscriptionTypeORM {
    @Column((type)=>RouteIdTypeorm,{prefix:false})
    public routeId:RouteIdTypeorm
 
-  @Column('varchar', { name: 'membership', length: 1, nullable: false })
+  @Column('varchar', { name: 'membership', length: 10, nullable: false })
   public subscriptionsMembership: SubscriptionsMembership;
 
   @Column((type) => AuditTrailTypeORM, { prefix: false })
