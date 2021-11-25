@@ -24,7 +24,7 @@ export class Account extends AggregateRoot {
   }
 
   public open() {
-    const event = new AccountOpened(this.id.getValue(), this.number.getValue(), this.userId.getValue());
+    const event = new AccountOpened(this.id.getValue(), this.number.getValue(), this.userId.getValue(),this.balance.getAmount());
     this.apply(event);
   }
 

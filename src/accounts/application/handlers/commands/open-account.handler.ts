@@ -31,7 +31,9 @@ export class OpenAccountHandler
     if (accountNumberResult.isFailure()) {
       return accountId;
     }
-    const balance: Money = Money.create(0, Currency.SOLES);
+    const balance: Money = Money.create(command.balance, Currency.DOLARES);
+    console.log("Ammoun:");
+    console.log(balance);
     const userId: UserId = UserId.of(command.userId);
     let account: Account = AccountFactory.createFrom(accountNumberResult.value, balance, userId, null);
     let accountTypeORM: AccountTypeORM = AccountMapper.toTypeORM(account);

@@ -14,7 +14,7 @@ export class GetUsersTeacherHandler
     const sql = `
     SELECT 
       id,
-      teacher_name as teacherName,
+      teacher_name as teacherName,0
       speciality as speciality
     FROM 
       users
