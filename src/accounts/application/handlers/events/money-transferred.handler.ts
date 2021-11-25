@@ -13,8 +13,8 @@ import { Money } from '../../../../common/domain/value-objects/money.value';
 import { Currency } from '../../../../common/domain/enums/currency.enum';
 import { UserId } from '../../../../users/domain/value-objects/user-id.value';
 import { AccountId } from '../../../domain/value-objects/account-id.value';
-import { MoneyTransferred } from '../../../../transactions/domain/events/money-transferred.event';
-import { CompleteTransaction } from '../../../../transactions/application/commands/complete-transaction.command';
+import { MoneyTransferred } from '../../../../subscriptions/domain/events/money-transferred.event';
+import { CompleteSubscription } from "../../../../subscriptions/application/commands/complete-subscriptions.command";
 
 @EventsHandler(MoneyTransferred)
 export class MoneyTransferredHandler implements IEventHandler<MoneyTransferred> {
@@ -71,15 +71,15 @@ export class MoneyTransferredHandler implements IEventHandler<MoneyTransferred> 
     fromAccountTypeORM = AccountMapper.toTypeORM(fromAccount);
     toAccountTypeORM = AccountMapper.toTypeORM(toAccount);
 
-    await getManager().transaction(async transactionalEntityManager => {
-      await transactionalEntityManager.save(fromAccountTypeORM);
-      await transactionalEntityManager.save(toAccountTypeORM);
+    await getManager().transaction(async (subscriptionalEntityManager) => {
+      await subscriptionalEntityManager.save(fromAccountTypeORM);
+      await subscriptionalEntityManager.save(toAccountTypeORM);
       if (fromAccountTypeORM == null || toAccountTypeORM == null) {
         console.log('MoneyTransferred error');
         return;
       }
-      const completeTransaction: CompleteTransaction = new CompleteTransaction(event.transactionId);
-      await this.commandBus.execute(completeTransaction);
+      const completeSubscription: CompleteSubscription = new CompleteSubscription(event.subscriptionId);
+      await this.commandBus.execute(completeSubscription);
     });
   }
 }

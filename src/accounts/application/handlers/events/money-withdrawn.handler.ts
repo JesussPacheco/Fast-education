@@ -13,9 +13,9 @@ import { Money } from '../../../../common/domain/value-objects/money.value';
 import { Currency } from '../../../../common/domain/enums/currency.enum';
 
 import { AccountId } from '../../../domain/value-objects/account-id.value';
-import { MoneyWithdrawn } from '../../../../transactions/domain/events/money-withdrawn.event';
-import { CompleteTransaction } from '../../../../transactions/application/commands/complete-transaction.command';
-import { UserId } from "../../../../users/domain/value-objects/user-id.value";
+import { MoneyWithdrawn } from '../../../../subscriptions/domain/events/money-withdrawn.event';
+import { UserId } from '../../../../users/domain/value-objects/user-id.value';
+import { CompleteSubscription } from "../../../../subscriptions/application/commands/complete-subscriptions.command";
 
 @EventsHandler(MoneyWithdrawn)
 export class MoneyWithdrawnHandler implements IEventHandler<MoneyWithdrawn> {
@@ -53,7 +53,7 @@ export class MoneyWithdrawnHandler implements IEventHandler<MoneyWithdrawn> {
       console.log('MoneyWithdrawn error');
       return;
     }
-    const completeTransaction: CompleteTransaction = new CompleteTransaction(event.transactionId);
-    await this.commandBus.execute(completeTransaction);
+    const completeSubscription: CompleteSubscription = new CompleteSubscription(event.subscriptionId);
+    await this.commandBus.execute(completeSubscription);
   }
 }

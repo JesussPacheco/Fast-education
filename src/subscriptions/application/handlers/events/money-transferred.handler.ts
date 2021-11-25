@@ -8,6 +8,6 @@ export class MoneyTransferredHandler implements IEventHandler<MoneyTransferred> 
   ) {}
 
   async handle(event: MoneyTransferred) {
-    console.log('Users BC - handle MoneyTransferred');
+    console.log('Subscription BC - handle MoneyTransferred');
   }
 }

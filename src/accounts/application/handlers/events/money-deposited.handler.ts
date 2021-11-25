@@ -1,6 +1,6 @@
 import { CommandBus, IEventHandler } from '@nestjs/cqrs';
 import { EventsHandler } from '@nestjs/cqrs/dist/decorators/events-handler.decorator';
-import { MoneyDeposited } from '../../../../transactions/domain/events/money-deposited.event';
+import { MoneyDeposited } from '../../../../subscriptions/domain/events/money-deposited.event';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AccountTypeORM } from '../../../infrastructure/persistence/typeorm/entities/account.typeorm';
 import { getManager, Repository } from 'typeorm';
@@ -14,7 +14,7 @@ import { Money } from '../../../../common/domain/value-objects/money.value';
 import { Currency } from '../../../../common/domain/enums/currency.enum';
 import { UserId } from '../../../../users/domain/value-objects/user-id.value';
 import { AccountId } from '../../../domain/value-objects/account-id.value';
-import { CompleteTransaction } from '../../../../transactions/application/commands/complete-transaction.command';
+import { CompleteSubscription } from '../../../../subscriptions/application/commands/complete-subscriptions.command';
 
 @EventsHandler(MoneyDeposited)
 export class MoneyDepositedHandler implements IEventHandler<MoneyDeposited> {
@@ -47,14 +47,14 @@ export class MoneyDepositedHandler implements IEventHandler<MoneyDeposited> {
       return;
     }
     accountTypeORM = AccountMapper.toTypeORM(account);
-    await getManager().transaction(async transactionalEntityManager => {
+    await getManager().transaction(async (subscriptionalEntityManager) => {
       accountTypeORM = await this.accountRepository.save(accountTypeORM);
       if (accountTypeORM == null) {
         console.log('MoneyDeposited error');
         return;
       }
-      const completeTransaction: CompleteTransaction = new CompleteTransaction(event.transactionId);
-      await this.commandBus.execute(completeTransaction);
+      const completeSubscription: CompleteSubscription = new CompleteSubscription(event.subscriptionId);
+      await this.commandBus.execute(completeSubscription);
     });
   }
 }
