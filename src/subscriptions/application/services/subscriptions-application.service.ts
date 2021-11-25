@@ -26,38 +26,12 @@ export class SubscriptionsApplicationService {
     private withdrawValidator: WithdrawMoneyValidator,
     private transferValidator: TransferMoneyValidator
   ) {}
-
-  async deposit(
-    depositRequestDto: DepositRequestDto,
-  ): Promise<Result<AppNotification, DepositResponseDto>> {
-    const notification: AppNotification = await this.depositValidator.validate(
-      depositRequestDto,
-    );
-    if (notification.hasErrors()) {
-      return Result.error(notification);
-    }
-    const depositMoney: DepositMoney = new DepositMoney(
-      depositRequestDto.accountNumber,
-      depositRequestDto.amount,
-      SubscriptionStatus.STARTED,
-      DateTime.utcNow()
-    );
-    const subscriptionId: number = await this.commandBus.execute(depositMoney);
-    const depositResponseDto: DepositResponseDto = new DepositResponseDto(
-      subscriptionId,
-      SubscriptionType.DEPOSIT,
-      depositRequestDto.accountNumber,
-      depositRequestDto.amount,
-      SubscriptionStatusLabel.get(SubscriptionStatus.STARTED),
-      null,
-    );
-    return Result.ok(depositResponseDto);
-  }
-
   async withdraw(
     withdrawRequestDto: WithdrawRequestDto,
   ): Promise<Result<AppNotification, WithdrawResponseDto>> {
-    const notification: AppNotification = await this.withdrawValidator.validate(withdrawRequestDto);
+    const notification: AppNotification = await this.withdrawValidator.validate(
+      withdrawRequestDto,
+    );
     if (notification.hasErrors()) {
       return Result.error(notification);
     }
@@ -67,40 +41,20 @@ export class SubscriptionsApplicationService {
       SubscriptionStatus.STARTED,
       DateTime.utcNow()
     );
-    const subscriptionId: number = await this.commandBus.execute(withdrawCommand);
+    const subscriptionId: number = await this.commandBus.execute(
+      withdrawCommand,
+    );
     const withdrawResponseDto: WithdrawResponseDto = new WithdrawResponseDto(
       subscriptionId,
       SubscriptionType.WITHDRAW,
       withdrawRequestDto.accountNumber,
       withdrawRequestDto.amount,
+      withdrawRequestDto.routeId,
+      withdrawRequestDto.membership,
       SubscriptionStatusLabel.get(SubscriptionStatus.STARTED),
       null
     );
     return Result.ok(withdrawResponseDto);
   }
-
-  async transfer(transferRequestDto: TransferRequestDto): Promise<Result<AppNotification, TransferResponseDto>> {
-    const notification: AppNotification = await this.transferValidator.validate(transferRequestDto);
-    if (notification.hasErrors()) {
-      return Result.error(notification);
-    }
-    const transferMoney: TransferMoney = new TransferMoney(
-      transferRequestDto.fromAccountNumber,
-      transferRequestDto.toAccountNumber,
-      transferRequestDto.amount,
-      SubscriptionStatus.STARTED,
-      DateTime.utcNow()
-    );
-    const subscriptionId: number = await this.commandBus.execute(transferMoney);
-    const transferResponseDto: TransferResponseDto = new TransferResponseDto(
-      subscriptionId,
-      SubscriptionType.TRANSFER,
-      transferRequestDto.fromAccountNumber,
-      transferRequestDto.toAccountNumber,
-      transferRequestDto.amount,
-      SubscriptionStatusLabel.get(SubscriptionStatus.STARTED),
-      null
-    );
-    return Result.ok(transferResponseDto);
-  }
+  
 }

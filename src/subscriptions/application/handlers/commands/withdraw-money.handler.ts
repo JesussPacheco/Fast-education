@@ -45,7 +45,7 @@ export class WithdrawMoneyHandler implements ICommandHandler<WithdrawMoney> {
       accountFrom,
       null,
       amount,
-      null,
+      routeId,
     );
     let subscriptionTypeORM: SubscriptionTypeORM =
       SubscriptionMapper.toTypeORM(subscription);

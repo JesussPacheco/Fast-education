@@ -5,7 +5,10 @@ export class WithdrawResponseDto {
     public readonly accountNumber: string,
     public readonly amount: number,
     public readonly status: string,
+    public readonly routeId: number,
+    public readonly membership:string,
     public readonly createdAt: string
+    
   ) {
   }
 }
