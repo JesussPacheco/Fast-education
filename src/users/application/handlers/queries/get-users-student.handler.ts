@@ -22,7 +22,7 @@ export class GetUsersStudentHandler implements IQueryHandler<GetUsersStudentQuer
     FROM 
       users
     WHERE
-      type = 'P'
+      type = 'S'
     ORDER BY
       last_name, first_name;`;
     const ormUsers = await manager.query(sql);

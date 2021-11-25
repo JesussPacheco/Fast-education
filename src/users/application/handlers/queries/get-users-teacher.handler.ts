@@ -19,7 +19,7 @@ export class GetUsersTeacherHandler
     FROM 
       users
     WHERE
-      type = 'C'
+      type = 'T'
     ORDER BY
       teacher_name;`;
     const ormUsers = await manager.query(sql);
