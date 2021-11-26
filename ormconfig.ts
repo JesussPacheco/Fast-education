@@ -1,6 +1,6 @@
 module.exports = {
   type: 'mysql',
-  url: process.env.BANKING_DDD_NEST_MYSQL,
+  url: process.env.FAST_EDUCATION_DDD_NEST_MYSQL,
   migrationsRun: true,
   logging: true,
   timezone: '+0',

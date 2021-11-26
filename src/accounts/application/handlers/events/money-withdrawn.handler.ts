@@ -11,10 +11,11 @@ import { AccountNumber } from '../../../domain/value-objects/account-number.valu
 import { AccountFactory } from '../../../domain/factories/account.factory';
 import { Money } from '../../../../common/domain/value-objects/money.value';
 import { Currency } from '../../../../common/domain/enums/currency.enum';
-import { CustomerId } from '../../../../customers/domain/value-objects/customer-id.value';
+
 import { AccountId } from '../../../domain/value-objects/account-id.value';
-import { MoneyWithdrawn } from '../../../../transactions/domain/events/money-withdrawn.event';
-import { CompleteTransaction } from '../../../../transactions/application/commands/complete-transaction.command';
+import { MoneyWithdrawn } from '../../../../subscriptions/domain/events/money-withdrawn.event';
+import { UserId } from '../../../../users/domain/value-objects/user-id.value';
+import { CompleteSubscription } from "../../../../subscriptions/application/commands/complete-subscriptions.command";
 
 @EventsHandler(MoneyWithdrawn)
 export class MoneyWithdrawnHandler implements IEventHandler<MoneyWithdrawn> {
@@ -39,9 +40,9 @@ export class MoneyWithdrawnHandler implements IEventHandler<MoneyWithdrawn> {
       return;
     }
     const accountAmount: Money = Money.create(accountTypeORM.balance.balance, accountTypeORM.balance.currency);
-    let account: Account = AccountFactory.withId(AccountId.of(accountTypeORM.id), accountNumberResult.value, accountAmount, CustomerId.of(accountTypeORM.customerId.value), null);
+    let account: Account = AccountFactory.withId(AccountId.of(accountTypeORM.id), accountNumberResult.value, accountAmount, UserId.of(accountTypeORM.userId.value), null);
     const withdrawAmount: Money = Money.create(event.amount, Currency.SOLES);
-    const depositResult: Result<AppNotification, Account> = account.withdraw(withdrawAmount);
+    const depositResult: Result<AppNotification, Account> = account.charge(withdrawAmount);
     if (depositResult.isFailure()) {
       console.log('MoneyWithdrawn error');
       return;
@@ -52,7 +53,7 @@ export class MoneyWithdrawnHandler implements IEventHandler<MoneyWithdrawn> {
       console.log('MoneyWithdrawn error');
       return;
     }
-    const completeTransaction: CompleteTransaction = new CompleteTransaction(event.transactionId);
-    await this.commandBus.execute(completeTransaction);
+    const completeSubscription: CompleteSubscription = new CompleteSubscription(event.subscriptionId);
+    await this.commandBus.execute(completeSubscription);
   }
 }

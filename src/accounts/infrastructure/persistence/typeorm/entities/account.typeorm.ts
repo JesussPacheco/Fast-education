@@ -1,9 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { AccountNumberTypeORM } from '../value-objects/account-number.typeorm';
-import { AccountIdTypeORM } from '../value-objects/account-id.typeorm';
 import { BalanceTypeORM } from '../value-objects/balance.typeorm';
-import { CustomerIdTypeORM } from '../value-objects/customer-id.typeorm';
 import { AuditTrailTypeORM } from '../../../../../common/infrastructure/persistence/typeorm/value-objects/audit-trail.typeorm';
+import { UserIdTypeORM } from "../value-objects/student-id.typeorm";
+
 
 @Entity('accounts')
 @Unique('UQ_accounts_number', ['number.value'])
@@ -17,8 +17,8 @@ export class AccountTypeORM {
   @Column((type) => BalanceTypeORM, { prefix: false })
   public balance: BalanceTypeORM;
 
-  @Column((type) => CustomerIdTypeORM, { prefix: false })
-  public customerId: CustomerIdTypeORM;
+  @Column((type) => UserIdTypeORM, { prefix: false })
+  public userId: UserIdTypeORM;
 
   @Column((type) => AuditTrailTypeORM, { prefix: false })
   public auditTrail: AuditTrailTypeORM;

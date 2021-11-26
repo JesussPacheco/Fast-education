@@ -20,12 +20,13 @@ export class AccountsApplicationService {
       return Result.error(notification);
     }
     const openAccount: OpenAccount = new OpenAccount(
-      openAccountRequestDto.customerId,
-      openAccountRequestDto.number
+      openAccountRequestDto.userId,
+      openAccountRequestDto.number,
+      openAccountRequestDto.balance
     );
     const accountId: number = await this.commandBus.execute(openAccount);
     const openAccountResponse: OpenAccountResponse = new OpenAccountResponse(
-      accountId, openAccount.number, 0, null, 1, null, null, openAccount.customerId
+      accountId, openAccount.number, openAccount.balance, null, 1, null, null, openAccount.userId
     );
     return Result.ok(openAccountResponse);
   }

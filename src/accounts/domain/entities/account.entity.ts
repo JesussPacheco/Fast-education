@@ -1,4 +1,4 @@
-import { CustomerId } from '../../../customers/domain/value-objects/customer-id.value';
+import { UserId } from '../../../users/domain/value-objects/user-id.value';
 import { Money } from '../../../common/domain/value-objects/money.value';
 import { AppNotification } from '../../../common/application/app.notification';
 import { Result } from 'typescript-result';
@@ -12,19 +12,19 @@ export class Account extends AggregateRoot {
   private id: AccountId;
   private readonly number: AccountNumber;
   private balance: Money;
-  private readonly customerId: CustomerId;
+  private readonly userId: UserId;
   private readonly auditTrail: AuditTrail;
 
-  public constructor(number: AccountNumber, balance: Money, customerId: CustomerId, auditTrail: AuditTrail) {
+  public constructor(number: AccountNumber, balance: Money, userId: UserId, auditTrail: AuditTrail) {
     super();
     this.number = number;
     this.balance = balance;
-    this.customerId = customerId;
+    this.userId = userId;
     this.auditTrail = auditTrail;
   }
 
   public open() {
-    const event = new AccountOpened(this.id.getValue(), this.number.getValue(), this.customerId.getValue());
+    const event = new AccountOpened(this.id.getValue(), this.number.getValue(), this.userId.getValue(),this.balance.getAmount());
     this.apply(event);
   }
 
@@ -37,10 +37,10 @@ export class Account extends AggregateRoot {
     return Result.ok(this);
   }
 
-  public withdraw(amount: Money): Result<AppNotification, Account> {
+  public charge(amount: Money): Result<AppNotification, Account> {
     const notification: AppNotification = this.validate(amount);
     if (this.balance.getAmount() < amount.getAmount()) {
-      notification.addError('Cannot withdraw in the account, amount is greater than balance', null);
+      notification.addError('Cannot charge in the account, amount is greater than balance', null);
     }
     if (notification.hasErrors()) {
       return Result.error(notification);
@@ -84,8 +84,8 @@ export class Account extends AggregateRoot {
     return this.balance;
   }
 
-  public getCustomerId(): CustomerId {
-    return this.customerId;
+  public getUserId(): UserId {
+    return this.userId;
   }
 
   public getAuditTrail(): AuditTrail {

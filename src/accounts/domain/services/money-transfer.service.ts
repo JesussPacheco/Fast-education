@@ -5,7 +5,7 @@ import { AppNotification } from '../../../common/application/app.notification';
 
 export class MoneyTransferService {
   public transfer(fromAccount: Account, toAccount: Account, amount: Money) {
-    //fromAccount.withdraw();
+    //fromAccount.charge();
     //toAccount.deposit();
   }
 }

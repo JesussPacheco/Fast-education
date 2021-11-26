@@ -11,8 +11,9 @@ import { Currency } from '../../../../common/domain/enums/currency.enum';
 import { AccountFactory } from '../../../domain/factories/account.factory';
 import { Account } from '../../../domain/entities/account.entity';
 import { AccountMapper } from '../../mappers/account.mapper';
-import { CustomerId } from '../../../../customers/domain/value-objects/customer-id.value';
+
 import { AccountId } from '../../../domain/value-objects/account-id.value';
+import { UserId } from "../../../../users/domain/value-objects/user-id.value";
 
 @CommandHandler(OpenAccount)
 export class OpenAccountHandler
@@ -30,9 +31,11 @@ export class OpenAccountHandler
     if (accountNumberResult.isFailure()) {
       return accountId;
     }
-    const balance: Money = Money.create(0, Currency.SOLES);
-    const customerId: CustomerId = CustomerId.of(command.customerId);
-    let account: Account = AccountFactory.createFrom(accountNumberResult.value, balance, customerId, null);
+    const balance: Money = Money.create(command.balance, Currency.DOLARES);
+    console.log("Ammoun:");
+    console.log(balance);
+    const userId: UserId = UserId.of(command.userId);
+    let account: Account = AccountFactory.createFrom(accountNumberResult.value, balance, userId, null);
     let accountTypeORM: AccountTypeORM = AccountMapper.toTypeORM(account);
     accountTypeORM = await this.accountRepository.save(accountTypeORM);
     if (accountTypeORM == null) {

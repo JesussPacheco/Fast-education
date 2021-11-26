@@ -1,7 +1,8 @@
 export class OpenAccountRequest {
   constructor(
-    public readonly customerId: number,
-    public readonly number: string
+    public readonly userId: number,
+    public readonly number: string,
+    public readonly balance:number
   ) {
   }
 }

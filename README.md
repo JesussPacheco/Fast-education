@@ -12,7 +12,6 @@ $ npm install
 $ npm run build
 $ npm run typeorm:win migration:generate -- -n InitialSchema
 $ npm run start:dev
-```
 
 ## Run app - Linux / Mac
 
@@ -31,7 +30,7 @@ $ npm install --save @nestjs/cqrs
 $ npm install --save typescript-result
 $ npm install --save moment-timezone
 $ npm install --save node-sql-reader
-$ nest g resource customers
+$ nest g resource users
 ```
 
 ## Environment variables
