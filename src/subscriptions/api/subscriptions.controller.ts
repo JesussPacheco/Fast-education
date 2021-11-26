@@ -4,27 +4,24 @@ import { AppNotification } from '../../common/application/app.notification';
 import { ApiController } from '../../common/api/api.controller';
 import { QueryBus } from '@nestjs/cqrs';
 import { SubscriptionsApplicationService } from '../application/services/subscriptions-application.service';
+import { WithdrawResponseDto } from '../application/dtos/response/withdraw-response.dto';
 import { WithdrawRequestDto } from '../application/dtos/request/withdraw-request.dto';
-import { DepositResponseDto } from "../application/dtos/response/deposit-response.dto";
-import { WithdrawResponseDto } from "../application/dtos/response/withdraw-response.dto";
-
-
 
 @Controller('subscriptions')
 export class SubscriptionsController {
   constructor(
     private readonly subscriptionsApplicationService: SubscriptionsApplicationService,
-    private readonly queryBus: QueryBus
-  ) {
-  }
+    private readonly queryBus: QueryBus,
+  ) {}
 
-  @Post('/withdraw')
-  async withdraw(
+  @Post('/charge')
+  async charge(
     @Body() withdrawRequestDto: WithdrawRequestDto,
-    @Res({ passthrough: true }) response
+    @Res({ passthrough: true }) response,
   ): Promise<object> {
     try {
-      const result: Result<AppNotification, WithdrawResponseDto> = await this.subscriptionsApplicationService.withdraw(withdrawRequestDto);
+      const result: Result<AppNotification, WithdrawResponseDto> =
+        await this.subscriptionsApplicationService.charge(withdrawRequestDto);
       if (result.isSuccess()) {
         return ApiController.created(response, result.value);
       }

@@ -1,18 +1,18 @@
-import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { AccountTypeORM } from "../../../../accounts/infrastructure/persistence/typeorm/entities/account.typeorm";
-import { Money } from "../../../../common/domain/value-objects/money.value";
-import { Currency } from "../../../../common/domain/enums/currency.enum";
+import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { AccountTypeORM } from '../../../../accounts/infrastructure/persistence/typeorm/entities/account.typeorm';
+import { Money } from '../../../../common/domain/value-objects/money.value';
+import { Currency } from '../../../../common/domain/enums/currency.enum';
+import { AccountId } from '../../../../accounts/domain/value-objects/account-id.value';
+import { Subscription } from '../../../domain/entities/subscriptions.entity';
+import { SubscriptionFactory } from '../../../domain/factories/subscriptions.factory';
+import { SubscriptionStatus } from '../../../domain/enums/subscriptions.status.enum';
+import { SubscriptionTypeORM } from '../../../infrastructure/persistence/typeorm/entities/subscription.typeorm';
+import { SubscriptionMapper } from '../../mappers/subscriptions.mapper';
+import { SubscriptionId } from '../../../domain/value-objects/subscriptions-id.value';
+import { RouteId } from '../../../../routes/domain/value-objects/route-id.value';
 import { WithdrawMoney } from "../../commands/withdraw-money.command";
-import { AccountId } from "../../../../accounts/domain/value-objects/account-id.value";
-import { Subscription } from "../../../domain/entities/subscriptions.entity";
-import { SubscriptionFactory } from "../../../domain/factories/subscriptions.factory";
-import { SubscriptionStatus } from "../../../domain/enums/subscriptions.status.enum";
-import { SubscriptionTypeORM } from "../../../infrastructure/persistence/typeorm/entities/subscription.typeorm";
-import { SubscriptionMapper } from "../../mappers/subscriptions.mapper";
-import { SubscriptionId } from "../../../domain/value-objects/subscriptions-id.value";
-import { RouteId } from "../../../../routes/domain/value-objects/route-id.value";
 
 @CommandHandler(WithdrawMoney)
 export class WithdrawMoneyHandler implements ICommandHandler<WithdrawMoney> {
@@ -59,7 +59,7 @@ export class WithdrawMoneyHandler implements ICommandHandler<WithdrawMoney> {
     subscriptionId = Number(subscriptionTypeORM.id);
     subscription.changeId(SubscriptionId.of(subscriptionId));
     subscription = this.publisher.mergeObjectContext(subscription);
-    subscription.withdraw();
+    subscription.charge();
     subscription.commit();
     return subscriptionId;
   }

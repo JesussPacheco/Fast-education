@@ -36,7 +36,7 @@ export class Subscription extends AggregateRoot {
   }
 
 
-  public withdraw() {
+  public charge() {
     const event = new MoneyWithdrawn(
       this.id.getValue(),
       this.accountFrom.getValue(),

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AppNotification } from 'src/common/application/app.notification';
 import { Repository } from 'typeorm';
 import { AccountTypeORM } from '../../../accounts/infrastructure/persistence/typeorm/entities/account.typeorm';
-import { WithdrawRequestDto } from '../dtos/request/withdraw-request.dto';
+import { WithdrawRequestDto } from "../dtos/request/withdraw-request.dto";
 
 @Injectable()
 export class WithdrawMoneyValidator {

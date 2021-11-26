@@ -42,7 +42,7 @@ export class MoneyWithdrawnHandler implements IEventHandler<MoneyWithdrawn> {
     const accountAmount: Money = Money.create(accountTypeORM.balance.balance, accountTypeORM.balance.currency);
     let account: Account = AccountFactory.withId(AccountId.of(accountTypeORM.id), accountNumberResult.value, accountAmount, UserId.of(accountTypeORM.userId.value), null);
     const withdrawAmount: Money = Money.create(event.amount, Currency.SOLES);
-    const depositResult: Result<AppNotification, Account> = account.withdraw(withdrawAmount);
+    const depositResult: Result<AppNotification, Account> = account.charge(withdrawAmount);
     if (depositResult.isFailure()) {
       console.log('MoneyWithdrawn error');
       return;

@@ -37,10 +37,10 @@ export class Account extends AggregateRoot {
     return Result.ok(this);
   }
 
-  public withdraw(amount: Money): Result<AppNotification, Account> {
+  public charge(amount: Money): Result<AppNotification, Account> {
     const notification: AppNotification = this.validate(amount);
     if (this.balance.getAmount() < amount.getAmount()) {
-      notification.addError('Cannot withdraw in the account, amount is greater than balance', null);
+      notification.addError('Cannot charge in the account, amount is greater than balance', null);
     }
     if (notification.hasErrors()) {
       return Result.error(notification);
