@@ -11,10 +11,8 @@ import { SubscriptionFactory } from "../../../domain/factories/subscriptions.fac
 import { SubscriptionStatus } from "../../../domain/enums/subscriptions.status.enum";
 import { SubscriptionTypeORM } from "../../../infrastructure/persistence/typeorm/entities/subscription.typeorm";
 import { SubscriptionMapper } from "../../mappers/subscriptions.mapper";
-import { SubscriptionType } from "../../../domain/enums/subscriptions-type.enum";
 import { SubscriptionId } from "../../../domain/value-objects/subscriptions-id.value";
 import { RouteId } from "../../../../routes/domain/value-objects/route-id.value";
-import { SubscriptionsMembership } from "../../../domain/enums/subscriptions-membership.enum";
 
 @CommandHandler(WithdrawMoney)
 export class WithdrawMoneyHandler implements ICommandHandler<WithdrawMoney> {
@@ -43,7 +41,6 @@ export class WithdrawMoneyHandler implements ICommandHandler<WithdrawMoney> {
     const amount: Money = Money.create(command.amount, Currency.SOLES);
     const routeId: RouteId = RouteId.create(command.routeId);
     let subscription: Subscription = SubscriptionFactory.createFrom(
-      SubscriptionType.WITHDRAW,
       SubscriptionStatus.STARTED,
       accountFrom,
       amount,

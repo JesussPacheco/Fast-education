@@ -1,6 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { AccountIdFromTypeORM } from '../value-objects/account-id-from.typeorm';
-import { AccountIdToTypeORM } from '../value-objects/account-id-to.typeorm';
 import { AmountTypeORM } from '../value-objects/amount.typeorm';
 import { AuditTrailTypeORM } from '../../../../../common/infrastructure/persistence/typeorm/value-objects/audit-trail.typeorm';
 import { SubscriptionStatus } from "../../../../domain/enums/subscriptions.status.enum";
@@ -10,15 +9,8 @@ import { RouteIdTypeorm } from '../value-objects/route-id.typeorm';
 export class SubscriptionTypeORM {
   @PrimaryGeneratedColumn('increment', { type: 'bigint', name: 'id', unsigned: true })
   public id: number;
-
-  @Column('char', { name: 'type', length: 1, nullable: false })
-  public type: string;
-
   @Column((type) => AccountIdFromTypeORM, { prefix: false })
   public accountIdFrom: AccountIdFromTypeORM;
-
-  @Column((type) => AccountIdToTypeORM, { prefix: false })
-  public accountIdTo: AccountIdToTypeORM;
 
   @Column((type) => AmountTypeORM, { prefix: false })
   public amount: AmountTypeORM;

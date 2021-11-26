@@ -8,7 +8,6 @@ import { RouteIdTypeORM } from "../../../routes/infrastructure/persistence/typeo
 export class SubscriptionMapper {
   public static toTypeORM(subscription: Subscription): SubscriptionTypeORM {
     const subscriptionTypeORM: SubscriptionTypeORM = new SubscriptionTypeORM();
-    subscriptionTypeORM.type = subscription.getType();
     subscriptionTypeORM.status = subscription.getStatus();
     subscriptionTypeORM.accountIdFrom = AccountIdFromTypeORM.from(subscription.getAccountFrom().getValue());
     subscriptionTypeORM.amount = AmountTypeORM.from(subscription.getAmount().getAmount(), subscription.getAmount().getCurrency());

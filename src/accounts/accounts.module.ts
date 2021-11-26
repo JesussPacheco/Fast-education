@@ -8,13 +8,11 @@ import { AccountsApplicationService } from './application/services/accounts-appl
 import { OpenAccountValidator } from './application/validators/open-account.validator';
 import { GetAccountsHandler } from './application/handlers/queries/get-accounts.handler';
 import { GetAccountByIdHandler } from './application/handlers/queries/get-account-by-id.handler';
-import { MoneyDepositedHandler } from './application/handlers/events/money-deposited.handler';
 import { OpenAccountHandler } from './application/handlers/commands/open-account.handler';
 import { MoneyWithdrawnHandler } from './application/handlers/events/money-withdrawn.handler';
-import { MoneyTransferredHandler } from './application/handlers/events/money-transferred.handler';
 
 export const CommandHandlers = [OpenAccountHandler];
-export const EventHandlers = [AccountOpenedHandler, MoneyDepositedHandler, MoneyWithdrawnHandler, MoneyTransferredHandler];
+export const EventHandlers = [AccountOpenedHandler, MoneyWithdrawnHandler];
 export const QueryHandlers = [GetAccountsHandler, GetAccountByIdHandler];
 
 @Module({

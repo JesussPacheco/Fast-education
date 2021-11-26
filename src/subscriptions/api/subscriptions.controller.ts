@@ -4,11 +4,11 @@ import { AppNotification } from '../../common/application/app.notification';
 import { ApiController } from '../../common/api/api.controller';
 import { QueryBus } from '@nestjs/cqrs';
 import { SubscriptionsApplicationService } from '../application/services/subscriptions-application.service';
-import { DepositRequestDto } from '../application/dtos/request/deposit-request.dto';
-import { DepositResponseDto } from '../application/dtos/response/deposit-response.dto';
 import { WithdrawRequestDto } from '../application/dtos/request/withdraw-request.dto';
-import { TransferRequestDto } from '../application/dtos/request/transfer-request.dto';
-import { TransferResponseDto } from '../application/dtos/response/transfer-response.dto';
+import { DepositResponseDto } from "../application/dtos/response/deposit-response.dto";
+import { WithdrawResponseDto } from "../application/dtos/response/withdraw-response.dto";
+
+
 
 @Controller('subscriptions')
 export class SubscriptionsController {
@@ -24,7 +24,7 @@ export class SubscriptionsController {
     @Res({ passthrough: true }) response
   ): Promise<object> {
     try {
-      const result: Result<AppNotification, DepositResponseDto> = await this.subscriptionsApplicationService.withdraw(withdrawRequestDto);
+      const result: Result<AppNotification, WithdrawResponseDto> = await this.subscriptionsApplicationService.withdraw(withdrawRequestDto);
       if (result.isSuccess()) {
         return ApiController.created(response, result.value);
       }

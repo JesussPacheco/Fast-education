@@ -15,11 +15,10 @@ import { StudentTypeORM } from './infrastructure/persistence/typeorm/entities/st
 
 import { TeacherRegisteredHandler } from './application/handlers/events/teacher-registered.handler';
 import { GetUsersTeacherHandler } from './application/handlers/queries/get-users-teacher.handler';
-import { MoneyTransferredHandler } from './application/handlers/events/money-transferred.handler';
-import { UserTypeORM } from "./infrastructure/persistence/typeorm/entities/user.typeorm";
+import { UserTypeORM } from './infrastructure/persistence/typeorm/entities/user.typeorm';
 
 export const CommandHandlers = [RegisterStudentHandler, RegisterTeacherHandler];
-export const EventHandlers = [StudentRegisteredHandler, TeacherRegisteredHandler, MoneyTransferredHandler];
+export const EventHandlers = [StudentRegisteredHandler, TeacherRegisteredHandler];
 export const QueryHandlers = [GetUsersStudentHandler, GetUsersTeacherHandler];
 
 @Module({
