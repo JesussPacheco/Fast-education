@@ -58,12 +58,17 @@ Strings containing the following characters must be quoted:
 $ cd dist
 $ cf push --no-start
 
+u201726085@upc.edu.pe
+Gimaj@2011
+
+cf set-env fast-educationJesusv5 ENVIRONMENT prod
 - cf set-env <app-name> BANKING_DDD_NEST_MYSQL mysql://{user}:{password}@{host}:{port}/{database}
-$ cf set-env banking-ddd-nest-ebautista BANKING_DDD_NEST_MYSQL mysql://admin:9lAzuWBCwMJZfqGlxAwC@mysql8.cselj9r9ujlf.us-east-2.rds.amazonaws.com:3306/banking-ddd-nest
+$ cf set-env fast-educationJesusv5 FAST_EDUCATION_DDD_NEST_MYSQL mysql://admin:adminadmin@mysql8.cselj9r9ujlf.us-east-2.rds.amazonaws.com:3306/fast-education
+
 
 $ cf env <app-name>
 
-$ cf start <app-name>
+$ cf start fast-educationJesusv5
 # if your application is not listening on 8080 then the health check will fail.
 ```
 

@@ -1,10 +1,10 @@
 ---
 applications:
-  - name: banking-ddd-nest-ebautista
-    memory: 128MB
+  - name:   fast-educationJesusv5
+    memory: 512MB
     instances: 1
     buildpacks:
       - nodejs_buildpack
     stack: cflinuxfs3
-    command: node src/main
+    command: node main
     timeout: 120
