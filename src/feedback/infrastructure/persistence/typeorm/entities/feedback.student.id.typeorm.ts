@@ -2,9 +2,9 @@ import { Column } from 'typeorm';
 
 export class feedbackStudentIdTypeorm {
   @Column( { type: 'bigint', name: 'student_id',  nullable: false })
-  value: number;
+  public value: number;
   private constructor(value: number) {
-    this.value = value;
+    this.value = Number (value);
   }
 
   public static from(value: number): feedbackStudentIdTypeorm {

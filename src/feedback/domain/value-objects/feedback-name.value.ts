@@ -7,7 +7,7 @@ export class FeedbackName {
   public static create(value: string) {
     return new FeedbackName(value);
   }
-  public gwtValue(): string{
+  public getValue(): string{
     return this.value;
   }
 }

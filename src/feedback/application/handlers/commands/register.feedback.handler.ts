@@ -22,28 +22,19 @@ export class RegisterFeedbackHandler
     private publisher: EventPublisher,
   ) {}
   async execute(command: RegisterFeedbackCommand) {
-    console.log('sign execute');
     const nameResult = FeedbackName.create(command.name);
     const teacherIdResult = TeacherId.create(command.teacherId);
     const studentIdResult = StudentId.create(command.studentId);
     const routeIdResult = RouteId.create(command.routerId);
-    console.log(nameResult);
-    console.log(teacherIdResult);
-    console.log(studentIdResult);
-    console.log(routeIdResult);
-    let feedback: Feedback = FeedbackFactory.createFrom(
-      nameResult,
-      teacherIdResult,
-      studentIdResult,
-      routeIdResult,
-    );
-    console.log(feedback);
-    let feedbackTypeORM = FeedbackMapper.toTypeORM(feedback);
+
+    let feedback: Feedback = FeedbackFactory.createFrom(nameResult,teacherIdResult, studentIdResult, routeIdResult,);
+    let feedbackTypeORM: FeedbackTypeorm = FeedbackMapper.toTypeORM(feedback);
     feedbackTypeORM = await this.feedbackRepository.save(feedbackTypeORM);
     if (feedbackTypeORM == null) {
       return 0;
     }
-    const feedbackId = Number(feedbackTypeORM.id);
+    let feedbackId: number = 0;
+    feedbackId = Number(feedbackTypeORM.id.value);
     feedback.changeId(FeedbackId.create(feedbackId));
     feedback = this.publisher.mergeObjectContext(feedback);
     feedback.register();

@@ -16,14 +16,11 @@ export class FeedbackApplicationService {
   async register(
     registerFeedbackRequestDTO: RegisterFeedbackRequestDto,
   ): Promise<Result<AppNotification, RegisterFeedbackResponseDto>> {
-    console.log('registerFeedbackRequestDTO');
-    console.log(registerFeedbackRequestDTO);
     const notification: AppNotification =
       await this.registerFeedbackValidator.validate(registerFeedbackRequestDTO);
-    console.log('pasa la ´prueba?');
+
 
     if (notification.hasErrors()) {
-      console.log('entra has erros');
       return Result.error(notification);
     }
 
@@ -37,8 +34,6 @@ export class FeedbackApplicationService {
     const feedbackId: number = await this.commandBus.execute(
       registerFeedbackCommand,
     );
-    console.log('El id generado');
-    console.log(registerFeedbackCommand);
     const registerFeedbackResponseDto: RegisterFeedbackResponseDto =
       new RegisterFeedbackResponseDto(
         feedbackId,

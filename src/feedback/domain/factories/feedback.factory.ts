@@ -27,6 +27,15 @@ export class FeedbackFactory {
     studentId: StudentId,
     routeId: RouteId,
   ): Feedback {
+    const feedback: Feedback = new Feedback(
+      id,
+      name,
+      teacherId,
+      studentId,
+      routeId,
+    );
+    //feedback.changeId(id);
+    //return feedback;
     return new Feedback(id, name, teacherId, studentId, routeId);
   }
 }

@@ -2,14 +2,14 @@ export class TeacherId {
   private readonly value: number;
 
   private constructor(value: number) {
-    this.value = value;
+    this.value =Number(value);
   }
 
-  public static create(value: number) {
+  public static create(value: number) : TeacherId{
     return new TeacherId(value);
   }
 
   public getValue(): number {
-    return this.value;
+    return Number( this.value);
   }
 }

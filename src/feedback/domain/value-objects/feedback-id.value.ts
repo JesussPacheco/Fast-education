@@ -1,13 +1,16 @@
 export class FeedbackId {
   private readonly value: number;
+
   private constructor(value: number) {
-    this.value = value;
+    this.value = Number(value);
   }
-  public static create(value: number) {
+
+  public static create(value: number): FeedbackId {
+
     return new FeedbackId(value);
   }
 
   public getValue(): number {
-    return this.value;
+    return Number(this.value);
   }
 }

@@ -38,13 +38,13 @@ export class Route extends AggregateRoot {
   public getName(): RouteName {
     return this.name;
   }
-  public changeId(id: RouteId) {
-    this.id = id;
-  }
   public getUniversityId(): UniversityId {
     return this.universityId;
   }
   public getGradeId(): GradeId {
     return this.gradeId;
+  }
+  public changeId(id: RouteId) {
+    this.id = id;
   }
 }

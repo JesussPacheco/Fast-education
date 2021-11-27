@@ -40,7 +40,10 @@ console.log(gradeIdResult);
     if (routeTypeORM == null) {
       return 0;
     }
-    const routeId = Number(RouteTypeorm.id);
+    console.log( "============typeof RouteTypeorm.id")
+    console.log( typeof routeTypeORM.id)
+    let routeId :number = 0;
+    routeId = Number(routeTypeORM.id.value);
     route.changeId(RouteId.create(routeId));
     route = this.publisher.mergeObjectContext(route);
     route.register();

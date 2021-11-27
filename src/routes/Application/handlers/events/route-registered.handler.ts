@@ -8,7 +8,7 @@ export class RouteRegisteredHandler implements IEventHandler<RouteRegisterEvent>
   constructor() {}
 
   handle(event: RouteRegisterEvent) {
-    console.log('handle logic for RouteRegisteredEvent');
-    console.log(event);
+    console.log('Handle logico for RouteRegisteredEvent');
+    //console.log(event);
   }
 }

@@ -30,7 +30,7 @@ export class Feedback extends AggregateRoot {
   public register() {
     const event = new FeedbackRegisterEvents(
       this.id.getValue(),
-      this.name.gwtValue(),
+      this.name.getValue(),
       this.teacherId.getValue(),
       this.studentId.getValue(),
       this.routerId.getValue(),
@@ -43,36 +43,36 @@ export class Feedback extends AggregateRoot {
     return this.id;
   }
 
-  public  changeId(value: FeedbackId) {
-    this.id = value;
-  }
-
   public getName(): FeedbackName {
     return this.name;
   }
 
-  public changeName(value: FeedbackName) {
-    this.name = value;
-  }
-
-  public getTeacherId(): TeacherId {
-    return this.teacherId;
-  }
-
-  public changeTeacherId(value: TeacherId) {
-    this.teacherId = value;
+  public getRouterId(): RouteId {
+    return this.routerId;
   }
 
   public getStudentId(): StudentId {
     return this.studentId;
   }
 
-  public changeStudentId(value: StudentId) {
-    this.studentId = value;
+  public getTeacherId(): TeacherId {
+    return this.teacherId;
   }
 
-  public getRouterId(): RouteId {
-    return this.routerId;
+  public changeId(value: FeedbackId) {
+    this.id = value;
+  }
+
+  public changeName(value: FeedbackName) {
+    this.name = value;
+  }
+
+  public changeTeacherId(value: TeacherId) {
+    this.teacherId = value;
+  }
+
+  public changeStudentId(value: StudentId) {
+    this.studentId = value;
   }
 
   public changeRouterId(value: RouteId) {
